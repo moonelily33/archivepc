@@ -1003,7 +1003,6 @@ hr {
   .summary-item:last-child strong {
     font-size: 10.5px;
   }
-}
 
   .mobile-summary {
     display: flex;
@@ -1066,6 +1065,7 @@ hr {
   .pc-image-wrap {
     border-radius: 10px;
   }
+}
 
 @media (max-width: 640px) {
   .main-content {

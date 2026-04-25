@@ -970,10 +970,9 @@ hr {
     display: flex;
     flex-wrap: nowrap;
     gap: 8px;
-    width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 0 12px 8px;
+    justify-content: flex-start;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -983,8 +982,8 @@ hr {
 
   .mobile-filter-top select {
     flex: 0 0 130px;
-    width: 130px !important;
-    min-width: 130px;
+    width: 180px;
+    min-width: 180px;
     height: 38px;
     font-size: 11px;
   }
@@ -1120,10 +1119,8 @@ hr {
     display: flex;
     flex-wrap: nowrap;
     gap: 6px;
-    width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 0 12px 6px;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -1133,8 +1130,8 @@ hr {
 
   .mobile-filter-top select {
     flex: 0 0 110px;
-    width: 110px !important;
-    min-width: 110px;
+    width: 180px;
+    min-width: 180px;
     height: 34px;
     font-size: 12px;
   }
@@ -1201,4 +1198,3 @@ hr {
     border-radius: 10px;
   }
 }
-

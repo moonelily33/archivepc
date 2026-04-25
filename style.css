@@ -188,7 +188,7 @@ hr {
   height: 36px;
   padding: 0 32px 0 10px;
   border: 1px solid var(--line);
-  border-radius: 9px;
+  border-radius: 8px;
   background-color: var(--surface-2);
   color: var(--text);
   font-size: 13px;
@@ -232,7 +232,7 @@ hr {
 .filters-reset-btn,
 .filters-apply-btn {
   height: 36px;
-  border-radius: 9px;
+  border-radius: 8px;
   font-size: 13px;
   transition: 0.2s ease;
 }
@@ -297,7 +297,7 @@ hr {
   height: 48px;
   padding: 0 16px;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 8px;
   background: var(--surface);
   color: var(--text);
   font-size: 13px;
@@ -324,7 +324,7 @@ hr {
   height: 48px;
   padding: 0 14px;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 8px;
   background: var(--surface);
   white-space: nowrap;
 }
@@ -361,7 +361,7 @@ hr {
   flex: 0 0 auto;
   padding: 7px 10px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--surface);
   display: flex;
   flex-direction: row;
@@ -699,6 +699,7 @@ hr {
 }
 
 .theme-option {
+  width: 100%;
   min-width: 78px;
   height: 34px;
   padding: 0 14px;

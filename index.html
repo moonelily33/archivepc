@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NCT JNJM Archive</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR DESKTOP -->
+  <aside class="sidebar">
+    <h1 class="logo">NCT JNJM.<span>archive</span></h1>
+    <hr />
+    
+
+    <section class="filter-section">
+      <h2 class="section-title">PHOTOCARD</h2>
+
+      <!-- MEMBER DESKTOP: BUTTON -->
+      <h3>MEMBER</h3>
+      <div class="filter-list" id="memberFilterGroup">
+        <button class="filter-choice active" data-member="all" type="button">All Members</button>
+        <button class="filter-choice" data-member="jeno" type="button">Jeno</button>
+        <button class="filter-choice" data-member="jaemin" type="button">Jaemin</button>
+        <button class="filter-choice" data-member="unit" type="button">Unit</button>
+      </div>
+
+      <!-- TYPE DESKTOP: BUTTON -->
+      <h3>TYPE</h3>
+      <div class="filter-list" id="typeFilterGroup">
+        <button class="filter-choice active" data-type="all" type="button">All Types</button>
+        <button class="filter-choice" data-type="album" type="button">Album</button>
+        <button class="filter-choice" data-type="pre-order-benefit" type="button">Pre-Order Benefit</button>
+        <button class="filter-choice" data-type="lucky-draw" type="button">Lucky Draw</button>
+        <button class="filter-choice" data-type="fan-sign" type="button">Fan Sign</button>
+        <button class="filter-choice" data-type="fan-meeting" type="button">Fan Meeting</button>
+        <button class="filter-choice" data-type="merchandise" type="button">Merchandise</button>
+        <button class="filter-choice" data-type="etc" type="button">Etc</button>
+      </div>
+
+      <!-- ERA DESKTOP: DROPDOWN -->
+      <h3>ERA</h3>
+      <select id="pc-era">
+        <option value="all">All Eras</option>
+        <option value="the-first">The First</option>
+        <option value="we-young">We Young</option>
+        <option value="empathy">Empathy</option>
+        <option value="we-go-up">We Go Up</option>
+        <option value="we-boom">We Boom</option>
+        <option value="the-dream">The Dream</option>
+        <option value="reload">Reload</option>
+        <option value="resonance-pt-1">Resonance Pt. 1</option>
+        <option value="resonance-pt-2">Resonance Pt. 2</option>
+        <option value="hot-sauce">Hot Sauce</option>
+        <option value="hello-future">Hello Future</option>
+        <option value="universe">Universe</option>
+        <option value="smcu-express">SMCU Express</option>
+        <option value="glitch-mode">Glitch Mode</option>
+        <option value="beat-box">Beatbox</option>
+        <option value="candy">Candy</option>
+        <option value="smcu-palace">SMCU Palace</option>
+        <option value="best-friend-ever">Best Friend Ever</option>
+        <option value="istj">ISTJ</option>
+        <option value="golden-age">Golden Age</option>
+        <option value="dreamscape">Dreamscape</option>
+        <option value="moonlight">Moonlight</option>
+        <option value="the-culture-the-future">The Culture The Future</option>
+        <option value="go-back-to-the-future">Go Back To The Future</option>
+        <option value="beat-it-up">Beat It Up</option>
+        <option value="both-sides">Both Sides</option>
+      </select>
+    </section>
+
+    <hr />
+    <button class="reset-btn" id="resetBtn" type="button">Reset 🔄</button>
+    <hr />
+    <button class="setting-btn" id="settingBtn" type="button">More ⚙️</button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- MOBILE TOPBAR -->
+    <section class="mobile-top">
+  <h1 class="mobile-logo">NCT JNJM Archive</h1>
+
+  <!-- ROW 1: SEARCH + SETTING -->
+  <div class="mobile-search-row">
+    <div class="mobile-search-wrap">
+      <input id="searchInputMobile" placeholder="🔍 Search photocard..." />
+    </div>
+
+    <button class="mobile-settings-btn" id="mobileSettingsBtn" type="button" aria-label="Settings">
+      <span>⚙️</span>
+    </button>
+  </div>
+
+  <!-- ROW 2: SUMMARY -->
+  <div class="mobile-summary" id="mobileSummary"></div>
+
+  <!-- ROW 3: FILTERS + RESET + ALL FILTERS -->
+  <div class="mobile-filter-top">
+    <select id="mobile-pc-member">
+      <option value="all">All Members</option>
+      <option value="jeno">Jeno</option>
+      <option value="jaemin">Jaemin</option>
+      <option value="unit">Unit</option>
+    </select>
+
+    <select id="mobile-pc-type">
+      <option value="all">All Types</option>
+      <option value="album">Album</option>
+      <option value="pre-order-benefit">POB</option>
+      <option value="lucky-draw">Lucky Draw</option>
+      <option value="fan-sign">Fan Sign</option>
+      <option value="fan-meeting">Fan Meeting</option>
+      <option value="merchandise">Merch</option>
+      <option value="etc">Etc</option>
+    </select>
+
+    <select id="mobile-pc-era">
+      <option value="all">All Eras</option>
+      <option value="the-first">The First</option>
+      <option value="we-young">We Young</option>
+      <option value="empathy">Empathy</option>
+      <option value="we-go-up">We Go Up</option>
+      <option value="we-boom">We Boom</option>
+      <option value="the-dream">The Dream</option>
+      <option value="reload">Reload</option>
+      <option value="resonance-pt-1">Resonance Pt. 1</option>
+      <option value="resonance-pt-2">Resonance Pt. 2</option>
+      <option value="hot-sauce">Hot Sauce</option>
+      <option value="hello-future">Hello Future</option>
+      <option value="universe">Universe</option>
+      <option value="smcu-express">SMCU Express</option>
+      <option value="glitch-mode">Glitch Mode</option>
+      <option value="beat-box">Beatbox</option>
+      <option value="candy">Candy</option>
+      <option value="smcu-palace">SMCU Palace</option>
+      <option value="best-friend-ever">Best Friend Ever</option>
+      <option value="istj">ISTJ</option>
+      <option value="golden-age">Golden Age</option>
+      <option value="dreamscape">Dreamscape</option>
+      <option value="moonlight">Moonlight</option>
+      <option value="the-culture-the-future">The Culture The Future</option>
+      <option value="go-back-to-the-future">Go Back To The Future</option>
+      <option value="beat-it-up">Beat It Up</option>
+      <option value="both-sides">Both Sides</option>
+    </select>
+
+    <button class="mobile-icon-btn" id="mobileResetBtn" type="button" aria-label="Reset filters">
+      <span>🔄</span>
+    </button>
+
+    <button class="mobile-icon-btn" id="openAllFilters" type="button" aria-label="All filters">
+      <span>🔽</span>
+    </button>
+  </div>
+</section>
+
+    <!-- DESKTOP SEARCH -->
+    <section class="main-bar">
+      <div class="main-search">
+        <input id="searchInput" placeholder="🔍 Search photocard..." />
+      </div>
+      <div class="main-stats" id="mainStats"></div>
+    </section>
+
+    <!-- GRID -->
+    <section class="pc-grid" id="pcGrid"></section>
+
+    <!-- EMPTY STATE -->
+    <section class="empty-state" id="emptyState" hidden>
+      <div class="empty-icon">🐶 🐱</div>
+      <h2>No photocards found</h2>
+      <p>Try adjusting your search or filters to find what you're looking for.</p>
+      <button class="reset-btn" id="emptyResetBtn" type="button">Reset Filters</button>
+    </section>
+
+  </main>
+</div>
+
+<button id="scrollTopBtn" type="button">⬆️</button>
+
+<!-- FILTERS MODAL MOBILE -->
+<div class="filters-modal" id="filtersModal" hidden>
+  <div class="filters-backdrop" id="filtersBackdrop"></div>
+
+  <section class="filters-panel">
+    <div class="filters-head">
+      <h2>Filters</h2>
+      <button class="filters-close" id="closeFiltersBtn" type="button">×</button>
+    </div>
+
+    <div class="filters-body">
+      <div class="modal-filter-block">
+        <h3>MEMBER</h3>
+        <select id="modal-pc-member">
+          <option value="all">All Members</option>
+          <option value="jeno">Jeno</option>
+          <option value="jaemin">Jaemin</option>
+          <option value="unit">Unit</option>
+        </select>
+      </div>
+
+      <div class="modal-filter-block">
+        <h3>TYPE</h3>
+        <select id="modal-pc-type">
+          <option value="all">All Types</option>
+          <option value="album">Album</option>
+          <option value="pre-order-benefit">Pre-Order Benefit</option>
+          <option value="lucky-draw">Lucky Draw</option>
+          <option value="fan-sign">Fan Sign</option>
+          <option value="fan-meeting">Fan Meeting</option>
+          <option value="merchandise">Merchandise</option>
+          <option value="etc">Etc</option>
+        </select>
+      </div>
+
+      <div class="modal-filter-block">
+        <h3>ERA</h3>
+        <select id="modal-pc-era">
+          <option value="all">All Eras</option>
+          <option value="the-first">The First</option>
+          <option value="we-young">We Young</option>
+          <option value="empathy">Empathy</option>
+          <option value="we-go-up">We Go Up</option>
+          <option value="we-boom">We Boom</option>
+          <option value="the-dream">The Dream</option>
+          <option value="reload">Reload</option>
+          <option value="resonance-pt-1">Resonance Pt. 1</option>
+          <option value="resonance-pt-2">Resonance Pt. 2</option>
+          <option value="hot-sauce">Hot Sauce</option>
+          <option value="hello-future">Hello Future</option>
+          <option value="universe">Universe</option>
+          <option value="smcu-express">SMCU Express</option>
+          <option value="glitch-mode">Glitch Mode</option>
+          <option value="beat-box">Beatbox</option>
+          <option value="candy">Candy</option>
+          <option value="smcu-palace">SMCU Palace</option>
+          <option value="best-friend-ever">Best Friend Ever</option>
+          <option value="istj">ISTJ</option>
+          <option value="golden-age">Golden Age</option>
+          <option value="dreamscape">Dreamscape</option>
+          <option value="moonlight">Moonlight</option>
+          <option value="the-culture-the-future">The Culture The Future</option>
+          <option value="go-back-to-the-future">Go Back To The Future</option>
+          <option value="beat-it-up">Beat It Up</option>
+          <option value="both-sides">Both Sides</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filters-actions">
+      <button class="filters-reset-btn" id="modalResetBtn" type="button">Reset</button>
+      <button class="filters-apply-btn" id="applyFiltersBtn" type="button">Apply</button>
+    </div>
+  </section>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="settings-modal" id="settingsModal" hidden>
+  <div class="settings-backdrop" id="settingsBackdrop"></div>
+
+  <section class="settings-panel">
+    <div class="settings-head">
+      <h2>⚙️ Settings</h2>
+      <button class="settings-close" id="closeSettingsBtn" type="button">×</button>
+    </div>
+
+    <div class="settings-page">
+
+  <!-- ABOUT -->
+  <section class="settings-section">
+    <h3>About</h3>
+    <p>NCT JNJM Archive is a small fan-made project dedicated to organizing and collecting Jeno & Jaemin photocards across different eras 🤍</p>
+    <p>This space was created to help fans easily browse, track, and enjoy their collections — whether for wishlists or simply admiring the cards 🌸☁️</p>
+    <p>This project is not affiliated with any official sources, and is purely made for personal and fan purposes only ⭐</p>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <section class="settings-section">
+    <h3>Disclaimer</h3>
+    <p>All credits go to the original owners 🤍 I only arranged and formatted the images into templates to make them easier to use 🌸</p>
+    <p>Please use this archive for personal purposes only — not for commercial use 🌙</p>
+    <p>Images shown may differ slightly from actual physical items due to formatting, cropping, or zoom adjustments ☁️</p>
+  </section>
+
+  <!-- COMMON TERMS -->
+  <section class="settings-section">
+    <h3>Common Terms</h3>
+    <p>Common abbreviations used across the archive</p>
+    <ul class="settings-list">
+      <li>POB = Pre-Order Benefit</li>
+      <li>LD = Lucky Draw</li>
+      <li>FS = Fansign</li>
+      <li>VCE = Video Call Event / Fancall</li>
+      <li>BTS = Back To School</li>
+      <li>SG = Season's Greetings</li>
+      <li>MD = Merchandise</li>
+      <li>SSM = Superstar SMTOWN</li>
+      <li>TC = Trading Card</li>
+      <li>SPC / SP = Sepcial</li>
+      <li>Pola = Polaroid</li>
+      <li>Holo = Hologram</li>
+      <li>KMS = KMStation</li>
+      <li>YZY = Yizhiyu / Withfans</li>
+      <li>GBTTF = Go Back To The Future</li>
+      <li>BIU = Beat It Up</li>
+    </ul>
+  </section>
+
+  <!-- THEME -->
+  <section class="settings-section">
+    <h3>Theme</h3>
+    <p>
+      Choose the vibe of your little space — Light mode feels soft and bright, like gentle daylight filling your screen 🌸 Dark mode feels calm and cozy, like quiet moments under the night sky 🌙✨
+    </p>
+    <div class="settings-row">
+      <button class="theme-option" data-theme="light" type="button">Light</button>
+      <button class="theme-option" data-theme="dark" type="button">Dark</button>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="settings-section">
+    <h3>Contact</h3>
+    <p>
+      If you find better images, notice missing items, or need corrections/removal, feel free to reach out anytime 🌸💌
+    </p>
+    <p>
+      Twitter / X:
+      <a class="contact-link" href="https://x.com/i2nqr" target="_blank">
+        @i2nqr
+      </a>
+    </p>
+  </section>
+
+</div>
+
+<!-- DATA FILES PER ERA -->
+<script src="data/the-first.js"></script>
+<script src="data/we-young.js"></script>
+<script src="data/empathy.js"></script>
+<script src="data/we-go-up.js"></script>
+<script src="data/we-boom.js"></script>
+<script src="data/the-dream.js"></script>
+<script src="data/reload.js"></script>
+<script src="data/resonance-pt-1.js"></script>
+<script src="data/resonance-pt-2.js"></script>
+<script src="data/hot-sauce.js"></script>
+<script src="data/hello-future.js"></script>
+<script src="data/universe.js"></script>
+<script src="data/smcu-express.js"></script>
+<script src="data/glitch-mode.js"></script>
+<script src="data/beat-box.js"></script>
+<script src="data/candy.js"></script>
+<script src="data/smcu-palace.js"></script>
+<script src="data/best-friend-ever.js"></script>
+<script src="data/istj.js"></script>
+<script src="data/golden-age.js"></script>
+<script src="data/dreamscape.js"></script>
+<script src="data/moonlight.js"></script>
+<script src="data/the-culture-the-future.js"></script>
+<script src="data/go-back-to-the-future.js"></script>
+<script src="data/beat-it-up.js"></script>
+<script src="data/both-sides.js"></script>
+
+<!-- MAIN LOGIC -->
+<script src="script.js"></script>
+
+</body>
+</html>

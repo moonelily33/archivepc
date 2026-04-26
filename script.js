@@ -1,254 +1,221 @@
 document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("pcGrid");
-  const emptyState = document.getElementById("emptyState");
-  const mobileSummary = document.getElementById("mobileSummary");
-  const mainStats = document.getElementById("mainStats");
-
   const searchInput = document.getElementById("searchInput");
-  const mobileSearch = document.getElementById("searchInputMobile");
 
-  /* DESKTOP SIDEBAR */
-  const memberButtons = document.querySelectorAll("[data-member]");
-  const typeButtons = document.querySelectorAll("[data-type]");
-  const eraFilter = document.getElementById("pc-era");
+  const memberSelect = document.getElementById("memberFilter");
+  const typeSelect = document.getElementById("typeFilter");
+  const eraSelect = document.getElementById("eraFilter");
 
-  /* MOBILE TOPBAR */
-  const mobileMember = document.getElementById("mobile-pc-member");
-  const mobileType = document.getElementById("mobile-pc-type");
-  const mobileEra = document.getElementById("mobile-pc-era");
-  const mobileResetBtn = document.getElementById("mobileResetBtn");
+  const desktopEraSelect = document.getElementById("desktopEraFilter");
+  const desktopMemberButtons = document.querySelectorAll(
+    ".desktop-filter-btn[data-member]"
+  );
+  const desktopTypeButtons = document.querySelectorAll(
+    ".desktop-filter-btn[data-type]"
+  );
 
-  /* BUTTONS */
   const resetBtn = document.getElementById("resetBtn");
+  const desktopResetBtn = document.getElementById("desktopResetBtn");
   const emptyResetBtn = document.getElementById("emptyResetBtn");
-  const settingBtn = document.getElementById("settingBtn");
-  const mobileSettingsBtn = document.getElementById("mobileSettingsBtn");
+
+  const emptyState = document.getElementById("emptyState");
   const scrollBtn = document.getElementById("scrollTopBtn");
 
-  /* SETTINGS */
+  const mobileSettingsBtn = document.getElementById("mobileSettingsBtn");
+  const desktopSettingsBtn = document.getElementById("desktopSettingsBtn");
+  const infoTab = document.getElementById("infoTab");
+
   const settingsModal = document.getElementById("settingsModal");
   const settingsBackdrop = document.getElementById("settingsBackdrop");
   const closeSettingsBtn = document.getElementById("closeSettingsBtn");
-  const themeOptions = document.querySelectorAll(".theme-option");
 
-  /* FILTER MODAL */
-  const openAllFiltersBtn = document.getElementById("openAllFilters");
+  const themeButtons = document.querySelectorAll(".theme-option");
+
+  const sumTotal = document.getElementById("sumTotal");
+  const sumJeno = document.getElementById("sumJeno");
+  const sumJaemin = document.getElementById("sumJaemin");
+  const sumUnit = document.getElementById("sumUnit");
+
+  const desktopSumTotal = document.getElementById("desktopSumTotal");
+  const desktopSumJeno = document.getElementById("desktopSumJeno");
+  const desktopSumJaemin = document.getElementById("desktopSumJaemin");
+  const desktopSumUnit = document.getElementById("desktopSumUnit");
+
+  const openFiltersBtn = document.getElementById("openFiltersBtn");
   const filtersModal = document.getElementById("filtersModal");
   const filtersBackdrop = document.getElementById("filtersBackdrop");
   const closeFiltersBtn = document.getElementById("closeFiltersBtn");
 
-  const modalMember = document.getElementById("modal-pc-member");
-  const modalType = document.getElementById("modal-pc-type");
-  const modalEra = document.getElementById("modal-pc-era");
+  const modalMemberFilter = document.getElementById("modalMemberFilter");
+  const modalTypeFilter = document.getElementById("modalTypeFilter");
+  const modalEraFilter = document.getElementById("modalEraFilter");
+  const modalApplyFiltersBtn = document.getElementById("modalApplyFiltersBtn");
+  const modalResetFiltersBtn = document.getElementById("modalResetFiltersBtn");
 
-  const applyFiltersBtn = document.getElementById("applyFiltersBtn");
-  const modalResetBtn = document.getElementById("modalResetBtn");
-
-  let desktopMember = "all";
-  let desktopType = "all";
-
-  const META = {
-    lastUpdate: "03 Jun 2026"
+  const state = {
+    search: "",
+    member: "all",
+    type: "all",
+    era: "all"
   };
 
-  const theFirstData = Array.isArray(globalThis.theFirstData) ? globalThis.theFirstData : [];
-  const weYoungData = Array.isArray(globalThis.weYoungData) ? globalThis.weYoungData : [];
-  const empathyData = Array.isArray(globalThis.empathyData) ? globalThis.empathyData : [];
-  const weGoUpData = Array.isArray(globalThis.weGoUpData) ? globalThis.weGoUpData : [];
-  const weBoomData = Array.isArray(globalThis.weBoomData) ? globalThis.weBoomData : [];
-  const theDreamData = Array.isArray(globalThis.theDreamData) ? globalThis.theDreamData : [];
-  const reloadData = Array.isArray(globalThis.reloadData) ? globalThis.reloadData : [];
-  const resonancePt1Data = Array.isArray(globalThis.resonancePt1Data) ? globalThis.resonancePt1Data : [];
-  const resonancePt2Data = Array.isArray(globalThis.resonancePt2Data) ? globalThis.resonancePt2Data : [];
-  const hotSauceData = Array.isArray(globalThis.hotSauceData) ? globalThis.hotSauceData : [];
-  const helloFutureData = Array.isArray(globalThis.helloFutureData) ? globalThis.helloFutureData : [];
-  const universeData = Array.isArray(globalThis.universeData) ? globalThis.universeData : [];
-  const smcuExpressData = Array.isArray(globalThis.smcuExpressData) ? globalThis.smcuExpressData : [];
-  const glitchModeData = Array.isArray(globalThis.glitchModeData) ? globalThis.glitchModeData : [];
-  const beatBoxData = Array.isArray(globalThis.beatBoxData) ? globalThis.beatBoxData : [];
-  const candyData = Array.isArray(globalThis.candyData) ? globalThis.candyData : [];
-  const smcuPalaceData = Array.isArray(globalThis.smcuPalaceData) ? globalThis.smcuPalaceData : [];
-  const bestFriendEverData = Array.isArray(globalThis.bestFriendEverData) ? globalThis.bestFriendEverData : [];
-  const istjData = Array.isArray(globalThis.istjData) ? globalThis.istjData : [];
-  const goldenAgeData = Array.isArray(globalThis.goldenAgeData) ? globalThis.goldenAgeData : [];
-  const dreamscapeData = Array.isArray(globalThis.dreamscapeData) ? globalThis.dreamscapeData : [];
-  const moonlightData = Array.isArray(globalThis.moonlightData) ? globalThis.moonlightData : [];
-  const theCultureTheFutureData = Array.isArray(globalThis.theCultureTheFutureData) ? globalThis.theCultureTheFutureData : [];
-  const goBackToTheFutureData = Array.isArray(globalThis.goBackToTheFutureData) ? globalThis.goBackToTheFutureData : [];
-  const beatItUpData = Array.isArray(globalThis.beatItUpData) ? globalThis.beatItUpData : [];
-  const bothSidesData = Array.isArray(globalThis.bothSidesData) ? globalThis.bothSidesData : [];
+  function openFiltersModal() {
+    if (!filtersModal) return;
+
+    if (modalMemberFilter) modalMemberFilter.value = state.member;
+    if (modalTypeFilter) modalTypeFilter.value = state.type;
+    if (modalEraFilter) modalEraFilter.value = state.era;
+
+    filtersModal.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeFiltersModal() {
+    if (!filtersModal) return;
+
+    filtersModal.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  if (openFiltersBtn) {
+    openFiltersBtn.addEventListener("click", openFiltersModal);
+  }
+
+  if (filtersBackdrop) {
+    filtersBackdrop.addEventListener("click", closeFiltersModal);
+  }
+
+  if (closeFiltersBtn) {
+    closeFiltersBtn.addEventListener("click", closeFiltersModal);
+  }
+
+  if (modalApplyFiltersBtn) {
+    modalApplyFiltersBtn.addEventListener("click", () => {
+      state.member = modalMemberFilter
+        ? modalMemberFilter.value
+        : state.member;
+
+      state.type = modalTypeFilter
+        ? modalTypeFilter.value
+        : state.type;
+
+      state.era = modalEraFilter
+        ? modalEraFilter.value
+        : state.era;
+
+      applyFilters();
+      closeFiltersModal();
+    });
+  }
+
+  if (modalResetFiltersBtn) {
+    modalResetFiltersBtn.addEventListener("click", () => {
+      resetFilters();
+      closeFiltersModal();
+    });
+  }
+
+  document.addEventListener("contextmenu", (e) => {
+    if (e.target.closest(".pc-image-wrap")) {
+      e.preventDefault();
+    }
+  });
+
+  document.addEventListener("dragstart", (e) => {
+    if (e.target.closest(".pc-image-wrap")) {
+      e.preventDefault();
+    }
+  });
 
   const allData = [
-    ...theFirstData,
-    ...weYoungData,
-    ...empathyData,
-    ...weGoUpData,
-    ...weBoomData,
-    ...theDreamData,
-    ...reloadData,
-    ...resonancePt1Data,
-    ...resonancePt2Data,
-    ...hotSauceData,
-    ...helloFutureData,
-    ...universeData,
-    ...smcuExpressData,
-    ...glitchModeData,
-    ...beatBoxData,
-    ...candyData,
-    ...smcuPalaceData,
-    ...bestFriendEverData,
-    ...istjData,
-    ...goldenAgeData,
-    ...dreamscapeData,
-    ...moonlightData,
-    ...theCultureTheFutureData,
-    ...goBackToTheFutureData,
-    ...beatItUpData,
-    ...bothSidesData
+    ...(globalThis.theFirstData || []),
+    ...(globalThis.weYoungData || []),
+    ...(globalThis.empathyData || []),
+    ...(globalThis.weGoUpData || []),
+    ...(globalThis.weBoomData || []),
+    ...(globalThis.theDreamData || []),
+    ...(globalThis.reloadData || []),
+    ...(globalThis.resonancePt1Data || []),
+    ...(globalThis.resonancePt2Data || []),
+    ...(globalThis.hotSauceData || []),
+    ...(globalThis.helloFutureData || []),
+    ...(globalThis.universeData || []),
+    ...(globalThis.smcuExpressData || []),
+    ...(globalThis.glitchModeData || []),
+    ...(globalThis.beatBoxData || []),
+    ...(globalThis.candyData || []),
+    ...(globalThis.smcuPalaceData || []),
+    ...(globalThis.bestFriendEverData || []),
+    ...(globalThis.istjData || []),
+    ...(globalThis.goldenAgeData || []),
+    ...(globalThis.dreamscapeData || []),
+    ...(globalThis.moonlightData || []),
+    ...(globalThis.theCultureTheFutureData || []),
+    ...(globalThis.goBackToTheFutureData || []),
+    ...(globalThis.beatItUpData || []),
+    ...(globalThis.bothSidesData || [])
   ];
 
-  function syncDesktopMember(value) {
-    desktopMember = value || "all";
+  function normalizeValue(value) {
+    return String(value || "").toLowerCase();
+  }
 
-    memberButtons.forEach((btn) => {
-      btn.classList.toggle("active", btn.dataset.member === desktopMember);
+  function getImageSrc(pc) {
+    return String(pc.img || pc.image || pc.src || "").trim();
+  }
+
+  function getFilteredData() {
+    return allData.filter((pc) => {
+      const member = normalizeValue(pc.member);
+      const type = normalizeValue(pc.type);
+      const era = normalizeValue(pc.era);
+
+      const text = [
+        pc.title,
+        pc.member,
+        pc.type,
+        pc.era,
+        pc.info
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return (
+        (state.member === "all" || member === state.member) &&
+        (state.type === "all" || type === state.type) &&
+        (state.era === "all" || era === state.era) &&
+        text.includes(state.search)
+      );
     });
-
-    if (mobileMember) mobileMember.value = desktopMember;
-    if (modalMember) modalMember.value = desktopMember;
   }
 
-  function syncDesktopType(value) {
-    desktopType = value || "all";
+  function updateSummary(list) {
+    const total = list.length;
 
-    typeButtons.forEach((btn) => {
-      btn.classList.toggle("active", btn.dataset.type === desktopType);
-    });
+    const jeno = list.filter(
+      (pc) => normalizeValue(pc.member) === "jeno"
+    ).length;
 
-    if (mobileType) mobileType.value = desktopType;
-    if (modalType) modalType.value = desktopType;
+    const jaemin = list.filter(
+      (pc) => normalizeValue(pc.member) === "jaemin"
+    ).length;
+
+    const unit = list.filter(
+      (pc) => normalizeValue(pc.member) === "unit"
+    ).length;
+
+    if (sumTotal) sumTotal.textContent = total;
+    if (sumJeno) sumJeno.textContent = jeno;
+    if (sumJaemin) sumJaemin.textContent = jaemin;
+    if (sumUnit) sumUnit.textContent = unit;
+
+    if (desktopSumTotal) desktopSumTotal.textContent = total;
+    if (desktopSumJeno) desktopSumJeno.textContent = jeno;
+    if (desktopSumJaemin) desktopSumJaemin.textContent = jaemin;
+    if (desktopSumUnit) desktopSumUnit.textContent = unit;
   }
 
-  function syncEra(value) {
-    const finalValue = value || "all";
-
-    if (eraFilter) eraFilter.value = finalValue;
-    if (mobileEra) mobileEra.value = finalValue;
-    if (modalEra) modalEra.value = finalValue;
-  }
-
-  function getCurrentSearch() {
-    return (searchInput?.value || mobileSearch?.value || "").trim().toLowerCase();
-  }
-
-  function getCurrentMember() {
-    if (window.innerWidth <= 900) {
-      return mobileMember?.value || desktopMember || "all";
-    }
-
-    return desktopMember || "all";
-  }
-
-  function getCurrentType() {
-    if (window.innerWidth <= 900) {
-      return mobileType?.value || desktopType || "all";
-    }
-
-    return desktopType || "all";
-  }
-
-  function getCurrentEra() {
-    if (window.innerWidth <= 900) {
-      return mobileEra?.value || eraFilter?.value || "all";
-    }
-
-    return eraFilter?.value || mobileEra?.value || "all";
-  }
-
-  function formatLastUpdate() {
-    return META.lastUpdate;
-  }
-
-  function getDisplayText(value, fallback = "-") {
-    if (typeof value === "string" && value.trim()) {
-      return value.trim();
-    }
-
-    return fallback;
-  }
-
-  function formatMemberLabel(member) {
-    if (!member) return "-";
-    return String(member).trim().toUpperCase();
-  }
-
-  function formatPrettyLabel(text) {
-    if (!text) return "-";
-
-    return String(text)
-      .trim()
-      .replace(/-/g, " ")
-      .replace(/\b\w/g, (char) => char.toUpperCase());
-  }
-
-  function renderSummary(list = []) {
-    const shown = list.length;
-    const jenoCount = list.filter((item) => item.member === "jeno").length;
-    const jaeminCount = list.filter((item) => item.member === "jaemin").length;
-    const unitCount = list.filter((item) => item.member === "unit").length;
-
-    if (mainStats) {
-      mainStats.innerHTML = `
-        <div class="main-pill">
-          <span>Total</span>
-          <strong>${shown}</strong>
-        </div>
-        <div class="main-pill">
-          <span>Jeno</span>
-          <strong>${jenoCount}</strong>
-        </div>
-        <div class="main-pill">
-          <span>Jaemin</span>
-          <strong>${jaeminCount}</strong>
-        </div>
-        <div class="main-pill">
-          <span>Unit</span>
-          <strong>${unitCount}</strong>
-        </div>
-        <div class="main-pill">
-          <span>Last update</span>
-          <strong>${formatLastUpdate()}</strong>
-        </div>
-      `;
-    }
-
-    if (mobileSummary) {
-      mobileSummary.innerHTML = `
-        <div class="summary-item">
-          <span>Total PC</span>
-          <strong>${shown}</strong>
-        </div>
-        <div class="summary-item">
-          <span>Total Jeno</span>
-          <strong>${jenoCount}</strong>
-        </div>
-        <div class="summary-item">
-          <span>Total Jaemin</span>
-          <strong>${jaeminCount}</strong>
-        </div>
-        <div class="summary-item">
-          <span>Total Unit</span>
-          <strong>${unitCount}</strong>
-        </div>
-        <div class="summary-item">
-          <span>Last Update</span>
-          <strong>${formatLastUpdate()}</strong>
-        </div>
-      `;
-    }
-  }
-
-  function renderGrid(list = []) {
+  function renderGrid(list) {
     if (!grid) return;
 
     grid.innerHTML = "";
@@ -261,254 +228,231 @@ document.addEventListener("DOMContentLoaded", () => {
     if (emptyState) emptyState.hidden = true;
 
     list.forEach((pc) => {
-      const imageSrc = pc.img || pc.image || "";
-      const memberText = pc.memberLabel || formatMemberLabel(pc.member);
-      const titleText = getDisplayText(pc.title);
-      const infoText = getDisplayText(pc.info);
-
       const card = document.createElement("article");
       card.className = "pc-card";
 
+      const imageSrc = getImageSrc(pc);
+      const hasImage = imageSrc.length > 0;
+
       card.innerHTML = `
-        <div class="pc-image-wrap">
-          <img
-            src="${imageSrc}"
-            alt="${titleText}"
-            class="pc-image"
-            loading="lazy"
-          />
-        </div>
-        <div class="pc-text">
-          <p class="pc-member">${memberText}</p>
-          <h3 class="pc-title">${titleText}</h3>
+        <div class="pc-image-wrap ${hasImage ? "" : "no-image"}">
+          <span class="pc-fallback-emoji" aria-hidden="true">🐶 🐰</span>
           ${
-            infoText && infoText !== "-"
-              ? `<p class="pc-info">${infoText}</p>`
+            hasImage
+              ? `<img
+                  src="${imageSrc}"
+                  alt="${pc.title || ""}"
+                  loading="lazy"
+                  draggable="false"
+                />`
               : ""
           }
         </div>
+
+        <div class="pc-text">
+          <p class="pc-member">${pc.member || ""}</p>
+          <h3 class="pc-title">${pc.title || ""}</h3>
+          ${pc.info ? `<p class="pc-info">${pc.info}</p>` : ""}
+        </div>
       `;
+
+      const img = card.querySelector(".pc-image-wrap img");
+      const imageWrap = card.querySelector(".pc-image-wrap");
+
+      if (img && imageWrap) {
+        img.addEventListener("error", () => {
+          img.remove();
+          imageWrap.classList.add("no-image");
+        });
+      }
 
       grid.appendChild(card);
     });
   }
 
-  function applyFilters() {
-    const search = getCurrentSearch();
-    const member = getCurrentMember();
-    const type = getCurrentType();
-    const era = getCurrentEra();
-
-    const filtered = allData.filter((pc) => {
-      const searchableText = [
-        pc.title,
-        pc.member,
-        pc.memberLabel,
-        pc.era,
-        pc.eraLabel,
-        pc.type,
-        pc.typeLabel,
-        pc.info,
-        pc.benefit
-      ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
-
-      const clean = (v) => String(v || "").toLowerCase().trim();
-
-      return (
-        (member === "all" || clean(pc.member) === clean(member)) &&
-        (type === "all" || clean(pc.type) === clean(type)) &&
-        (era === "all" || clean(pc.era) === clean(era)) &&
-        searchableText.includes(search)
+  function updateDesktopButtonStates() {
+    desktopMemberButtons.forEach((button) => {
+      button.classList.toggle(
+        "active",
+        button.dataset.member === state.member
       );
     });
 
-    renderGrid(filtered);
-    renderSummary(filtered);
+    desktopTypeButtons.forEach((button) => {
+      button.classList.toggle(
+        "active",
+        button.dataset.type === state.type
+      );
+    });
   }
 
-  function resetAllFilters() {
-    syncDesktopMember("all");
-    syncDesktopType("all");
-    syncEra("all");
+  function syncInputs() {
+    if (searchInput) searchInput.value = state.search;
 
-    if (searchInput) searchInput.value = "";
-    if (mobileSearch) mobileSearch.value = "";
+    if (memberSelect) memberSelect.value = state.member;
+    if (typeSelect) typeSelect.value = state.type;
+    if (eraSelect) eraSelect.value = state.era;
+    if (desktopEraSelect) desktopEraSelect.value = state.era;
+
+    updateDesktopButtonStates();
+  }
+
+  function applyFilters() {
+    const filtered = getFilteredData();
+
+    renderGrid(filtered);
+    updateSummary(filtered);
+    syncInputs();
+  }
+
+  function resetFilters() {
+    state.search = "";
+    state.member = "all";
+    state.type = "all";
+    state.era = "all";
 
     applyFilters();
   }
 
-  function openSettings() {
-  if (!settingsModal) {
-    console.log("settingsModal not found");
-    return;
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      state.search = e.target.value.toLowerCase().trim();
+      applyFilters();
+    });
   }
 
-  settingsModal.hidden = false;
-  document.body.style.overflow = "hidden";
+  if (memberSelect) {
+    memberSelect.addEventListener("change", (e) => {
+      state.member = e.target.value;
+      applyFilters();
+    });
+  }
 
-  const panel = document.querySelector(".settings-panel");
-  if (panel) panel.scrollTop = 0;
+  if (typeSelect) {
+    typeSelect.addEventListener("change", (e) => {
+      state.type = e.target.value;
+      applyFilters();
+    });
+  }
+
+  if (eraSelect) {
+    eraSelect.addEventListener("change", (e) => {
+      state.era = e.target.value;
+      applyFilters();
+    });
+  }
+
+  if (desktopEraSelect) {
+    desktopEraSelect.addEventListener("change", (e) => {
+      state.era = e.target.value;
+      applyFilters();
+    });
+  }
+
+  desktopMemberButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      state.member = button.dataset.member;
+      applyFilters();
+    });
+  });
+
+  desktopTypeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      state.type = button.dataset.type;
+      applyFilters();
+    });
+  });
+
+  if (resetBtn) {
+    resetBtn.addEventListener("click", resetFilters);
+  }
+
+  if (desktopResetBtn) {
+    desktopResetBtn.addEventListener("click", resetFilters);
+  }
+
+  if (emptyResetBtn) {
+    emptyResetBtn.addEventListener("click", resetFilters);
+  }
+
+  if (scrollBtn) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 200) {
+        scrollBtn.classList.add("show");
+      } else {
+        scrollBtn.classList.remove("show");
+      }
+    });
+
+    scrollBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
+
+  function openSettings() {
+    if (!settingsModal) return;
+
+    settingsModal.hidden = false;
+    document.body.style.overflow = "hidden";
   }
 
   function closeSettings() {
     if (!settingsModal) return;
+
     settingsModal.hidden = true;
     document.body.style.overflow = "";
   }
 
-  function openFilters() {
-    if (!filtersModal) return;
-
-    if (modalMember) modalMember.value = getCurrentMember();
-    if (modalType) modalType.value = getCurrentType();
-    if (modalEra) modalEra.value = getCurrentEra();
-
-    filtersModal.hidden = false;
-    document.body.style.overflow = "hidden";
+  if (mobileSettingsBtn) {
+    mobileSettingsBtn.addEventListener("click", openSettings);
   }
 
-  function closeFilters() {
-    if (!filtersModal) return;
-    filtersModal.hidden = true;
-    document.body.style.overflow = "";
+  if (desktopSettingsBtn) {
+    desktopSettingsBtn.addEventListener("click", openSettings);
   }
+
+  if (infoTab) {
+    infoTab.addEventListener("click", openSettings);
+  }
+
+  if (settingsBackdrop) {
+    settingsBackdrop.addEventListener("click", closeSettings);
+  }
+
+  if (closeSettingsBtn) {
+    closeSettingsBtn.addEventListener("click", closeSettings);
+  }
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeSettings();
+      closeFiltersModal();
+    }
+  });
 
   function setTheme(theme) {
-    const finalTheme = theme === "dark" ? "dark" : "light";
-    const isDark = finalTheme === "dark";
+    document.body.classList.toggle("dark-theme", theme === "dark");
+    localStorage.setItem("jnjm-theme", theme);
 
-    document.body.classList.toggle("dark-theme", isDark);
-    localStorage.setItem("theme", finalTheme);
-
-    themeOptions.forEach((btn) => {
-      btn.classList.toggle("is-active", btn.dataset.theme === finalTheme);
+    themeButtons.forEach((button) => {
+      button.classList.toggle(
+        "is-active",
+        button.dataset.theme === theme
+      );
     });
   }
 
-  /* SEARCH */
-  searchInput?.addEventListener("input", () => {
-    if (mobileSearch) mobileSearch.value = searchInput.value;
-    applyFilters();
-  });
-
-  mobileSearch?.addEventListener("input", () => {
-    if (searchInput) searchInput.value = mobileSearch.value;
-    applyFilters();
-  });
-
-  /* DESKTOP MEMBER BUTTONS */
-  memberButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      syncDesktopMember(btn.dataset.member || "all");
-      applyFilters();
+  themeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      setTheme(button.dataset.theme);
     });
   });
 
-  /* DESKTOP TYPE BUTTONS */
-  typeButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      syncDesktopType(btn.dataset.type || "all");
-      applyFilters();
-    });
-  });
+  const savedTheme = localStorage.getItem("jnjm-theme") || "light";
 
-  /* ERA DESKTOP */
-  eraFilter?.addEventListener("change", () => {
-    syncEra(eraFilter.value);
-    applyFilters();
-  });
-
-  /* MOBILE FILTERS */
-  mobileMember?.addEventListener("change", () => {
-    syncDesktopMember(mobileMember.value);
-    applyFilters();
-  });
-
-  mobileType?.addEventListener("change", () => {
-    syncDesktopType(mobileType.value);
-    applyFilters();
-  });
-
-  mobileEra?.addEventListener("change", () => {
-    syncEra(mobileEra.value);
-    applyFilters();
-  });
-
-  /* RESET */
-  resetBtn?.addEventListener("click", resetAllFilters);
-  mobileResetBtn?.addEventListener("click", resetAllFilters);
-  emptyResetBtn?.addEventListener("click", resetAllFilters);
-
-  modalResetBtn?.addEventListener("click", () => {
-    if (modalMember) modalMember.value = "all";
-    if (modalType) modalType.value = "all";
-    if (modalEra) modalEra.value = "all";
-  });
-
-  /* APPLY MODAL FILTERS */
-  applyFiltersBtn?.addEventListener("click", () => {
-    syncDesktopMember(modalMember?.value || "all");
-    syncDesktopType(modalType?.value || "all");
-    syncEra(modalEra?.value || "all");
-
-    applyFilters();
-    closeFilters();
-  });
-
-  /* SCROLL TOP */
-  window.addEventListener("scroll", () => {
-    if (!scrollBtn) return;
-
-    if (window.scrollY > 200) {
-      scrollBtn.classList.add("is-visible");
-    } else {
-      scrollBtn.classList.remove("is-visible");
-    }
-  });
-
-  scrollBtn?.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  /* SETTINGS */
-  settingBtn?.addEventListener("click", openSettings);
-  mobileSettingsBtn?.addEventListener("click", openSettings);
-  closeSettingsBtn?.addEventListener("click", closeSettings);
-  settingsBackdrop?.addEventListener("click", closeSettings);
-
-  /* FILTER MODAL */
-  openAllFiltersBtn?.addEventListener("click", openFilters);
-  closeFiltersBtn?.addEventListener("click", closeFilters);
-  filtersBackdrop?.addEventListener("click", closeFilters);
-
-  /* ESC CLOSE */
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      if (settingsModal && !settingsModal.hidden) closeSettings();
-      if (filtersModal && !filtersModal.hidden) closeFilters();
-    }
-  });
-
-  /* THEME */
-  themeOptions.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      setTheme(btn.dataset.theme);
-    });
-  });
-
-  const savedTheme = localStorage.getItem("theme") || "light";
   setTheme(savedTheme);
-
-  /* INIT */
-  syncDesktopMember("all");
-  syncDesktopType("all");
-  syncEra("all");
-
-  window.addEventListener("resize", applyFilters);
-
   applyFilters();
-  
 });

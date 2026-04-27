@@ -481,7 +481,7 @@ body.dark-theme #mobileSettingsBtn {
 }
 
 .pc-card:hover {
-  transform: none;
+  transform: translateY(-5px);
 }
 
 .pc-image-wrap {
@@ -1048,7 +1048,7 @@ body.dark-theme .modal-backdrop {
 
   .desktop-filter-btn {
     width: 100%;
-    min-height: 30px;
+    min-height: 27px;
     padding: 0 9px;
     border: 0;
     border-radius: 8px;

@@ -72,11 +72,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileSumJeno = document.getElementById("mobileSumJeno");
   const mobileSumJaemin = document.getElementById("mobileSumJaemin");
   const mobileSumUnit = document.getElementById("mobileSumUnit");
+  const mobileSumOther = document.getElementById("mobileSumOther");
 
   const desktopSumTotal = document.getElementById("desktopSumTotal");
   const desktopSumJeno = document.getElementById("desktopSumJeno");
   const desktopSumJaemin = document.getElementById("desktopSumJaemin");
   const desktopSumUnit = document.getElementById("desktopSumUnit");
+  const desktopSumOther = document.getElementById("desktopSumOther");
+
+  const mobileSumOtherItem = mobileSumOther ? mobileSumOther.closest(".scroll-item") : null;
+  const desktopSumOtherItem = desktopSumOther ? desktopSumOther.closest("span") : null;
 
   /* =====================================================
      STATE
@@ -315,13 +320,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function normalizeKey(value) {
-    return normalizeValue(value)
+    return String(value || "")
+      .toLowerCase()
+      .trim()
       .replace(/&/g, "and")
-      .replace(/\./g, "")
-      .replace(/\//g, " ")
-      .replace(/-/g, "_")
-      .replace(/\s+/g, "_")
-      .replace(/_+/g, "_");
+      .replace(/['’]/g, "")
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "");
+  }
+
+  function formatMemberName(member) {
+    const key = normalizeValue(member);
+
+    if (key === "jeno") return "Jeno";
+    if (key === "jaemin") return "Jaemin";
+    if (key === "unit") return "Unit";
+    if (key === "other") return "Other";
+
+
+    return String(member || "")
+      .toLowerCase()
+      .replace(/\b\w/g, (letter) => letter.toUpperCase());
   }
 
   function compareText(a, b) {
@@ -610,6 +629,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const itemMember = normalizeValue(item.member);
       const itemType = getTypeKey(item.type);
+      const itemItemType = getItemTypeKey(item.itemType);
+      const itemCategory = getNarcissismCategoryKey(item.category);
       const itemEra = getEraKey(item.era);
 
       const matchesSearch = !searchValue || text.includes(searchValue);
@@ -619,10 +640,24 @@ document.addEventListener("DOMContentLoaded", () => {
         state.member === "all" ||
         itemMember === normalizeValue(state.member);
 
+      const selectedType = getTypeKey(state.type);
+
       const matchesType =
         !shouldUseTypeFilter() ||
         state.type === "all" ||
-        itemType === getTypeKey(state.type);
+        itemType === selectedType ||
+        itemItemType === selectedType ||
+        itemCategory === selectedType ||
+        (
+          selectedType === "merchandise" &&
+          (
+            itemType === "merch" ||
+            itemType === "goods" ||
+            itemType === "md" ||
+            itemItemType === "merch" ||
+            itemItemType === "narcissism" ||
+            itemCategory === "non_pc"
+          ));
 
       const matchesEra =
         !shouldUseEraFilter() ||
@@ -784,15 +819,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const jaemin = items.filter((item) => normalizeValue(item.member) === "jaemin").length;
     const unit = items.filter((item) => normalizeValue(item.member) === "unit").length;
 
+    const other = state.page === "collection"
+      ? items.filter((item) => getItemTypeKey(item.itemType) !== "photocard").length
+      : items.filter((item) => {
+        const member = normalizeValue(item.member);
+
+        return (
+          member !== "jeno" &&
+          member !== "jaemin" &&
+          member !== "unit"
+        );
+      }).length;
+
     if (mobileSumTotal) mobileSumTotal.textContent = total;
     if (mobileSumJeno) mobileSumJeno.textContent = jeno;
     if (mobileSumJaemin) mobileSumJaemin.textContent = jaemin;
     if (mobileSumUnit) mobileSumUnit.textContent = unit;
+    if (mobileSumOther) mobileSumOther.textContent = other;
 
     if (desktopSumTotal) desktopSumTotal.textContent = total;
     if (desktopSumJeno) desktopSumJeno.textContent = jeno;
     if (desktopSumJaemin) desktopSumJaemin.textContent = jaemin;
     if (desktopSumUnit) desktopSumUnit.textContent = unit;
+    if (desktopSumOther) desktopSumOther.textContent = other;
   }
 
   function updateFilterVisibility() {
@@ -841,6 +890,16 @@ document.addEventListener("DOMContentLoaded", () => {
       mobileSummary.hidden = !showSummary;
     }
 
+    const showOtherSummary = state.page === "collection";
+
+    if (mobileSumOtherItem) {
+      mobileSumOtherItem.hidden = !showOtherSummary;
+    }
+
+    if (desktopSumOtherItem) {
+      desktopSumOtherItem.hidden = !showOtherSummary;
+    }
+
     if (desktopFilterGroup) {
       desktopFilterGroup.hidden = !showFullControls;
     }
@@ -854,6 +913,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  const showOtherSummary = state.page === "collection";
+
+  if (mobileSumOtherItem) {
+    mobileSumOtherItem.hidden = !showOtherSummary;
+  }
+
+  if (desktopSumOtherItem) {
+    desktopSumOtherItem.hidden = !showOtherSummary;
+  }
+  
   /* =====================================================
      FILTER OPTIONS
   ===================================================== */
@@ -962,22 +1031,31 @@ document.addEventListener("DOMContentLoaded", () => {
     state.page = page;
     document.body.dataset.page = page;
 
-    const navMap = [
-      [photocardNavBtn, "photocard"],
-      [collectionNavBtn, "collection"],
-      [photocardTab, "photocard"],
-      [collectionTab, "collection"]
+    const navButtons = [
+      photocardNavBtn,
+      collectionNavBtn,
+      photocardTab,
+      collectionTab,
+      infoTab
     ];
 
-    navMap.forEach(([button, buttonPage]) => {
+    navButtons.forEach((button) => {
       if (!button) return;
-
-      button.classList.toggle("is-active", buttonPage === page);
-      button.classList.toggle("active", buttonPage === page);
+      button.classList.remove("is-active", "active");
     });
 
-    if (infoTab) {
-      infoTab.classList.remove("is-active", "active");
+    if (page === "photocard") {
+      if (photocardNavBtn) photocardNavBtn.classList.add("is-active", "active");
+      if (photocardTab) photocardTab.classList.add("is-active", "active");
+    }
+
+    if (page === "collection") {
+      if (collectionNavBtn) collectionNavBtn.classList.add("is-active", "active");
+      if (collectionTab) collectionTab.classList.add("is-active", "active");
+    }
+
+    if (page === "settings") {
+      if (infoTab) infoTab.classList.add("is-active", "active");
     }
   }
 
@@ -1242,7 +1320,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function navigateToPage(page) {
-    state.page = page;
+    setActiveNav(page);
     renderCurrentPage();
   }
 

@@ -1240,10 +1240,10 @@ select,
 @media (min-width: 1024px) {
   .sidebar-handle {
     position: fixed !important;
-    top: 9%;
+    top: 50%;
     left: 220px;
-    transform: translate(-1px, -50%);
-    z-index: 300 !important;
+    transform: none;
+    z-index: 1300 !important;
     width: 25px;
     height: 40px;
     display: grid !important;
@@ -1266,7 +1266,7 @@ select,
 
   .app-shell.sidebar-collapsed .sidebar-handle {
     left: 0;
-    transform: translate(0, -50%);
+    transform: none;
   }
 }
 
@@ -1870,14 +1870,14 @@ body.dark-theme::after {
 
 @media (min-width: 1024px) {
   .sidebar-handle {
-    top: 76px;
+    top: 50%;
     left: 220px;
-    transform: none;
+    transform: translateY(-50%);
   }
 
   .app-shell.sidebar-collapsed .sidebar-handle {
     left: 0;
-    transform: none;
+    transform: translateY(-50%);
   }
 }
 

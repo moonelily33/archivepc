@@ -1,1556 +1,1332 @@
-document.addEventListener("DOMContentLoaded", () => {
-  /* =====================================================
-     ELEMENTS
-  ===================================================== */
+/* =====================================================
+   NCT JNJM ARCHIVE - MAIN SCRIPT
+===================================================== */
 
-  const appShell = document.querySelector(".app-shell");
 
-  const pageRoot = document.getElementById("pcGrid");
-  const emptyState = document.getElementById("emptyState");
+/* =====================================================
+   1. DATA SETUP
+===================================================== */
 
-  const searchInput = document.getElementById("searchInput");
+const allItems = [
+  ...(window.THE_FIRST || []),
+  ...(window.WE_YOUNG || []),
+  ...(window.EMPATHY || []),
+  ...(window.WE_GO_UP || []),
+  ...(window.WE_BOOM || []),
+  ...(window.THE_DREAM || []),
+  ...(window.RELOAD || []),
+  ...(window.RESONANCE_PT_1 || []),
+  ...(window.RESONANCE_PT_2 || []),
+  ...(window.HOT_SAUCE || []),
+  ...(window.HELLO_FUTURE || []),
+  ...(window.UNIVERSE || []),
+  ...(window.SMCU_EXPRESS || []),
+  ...(window.GLITCH_MODE || []),
+  ...(window.BEAT_BOX || []),
+  ...(window.CANDY || []),
+  ...(window.SMCU_PALACE || []),
+  ...(window.BEST_FRIEND_EVER || []),
+  ...(window.ISTJ || []),
+  ...(window.GOLDEN_AGE || []),
+  ...(window.DREAMSCAPE || []),
+  ...(window.MOONLIGHT || []),
+  ...(window.THE_CULTURE_THE_FUTURE || []),
+  ...(window.GO_BACK_TO_THE_FUTURE || []),
+  ...(window.BEAT_IT_UP || []),
+  ...(window.BOTH_SIDES || []),
+  ...(window.NARCISSISM || [])
+];
 
-  // Desktop filters
-  const desktopMemberFilter = document.getElementById("desktopMemberFilter");
-  const desktopTypeFilter = document.getElementById("desktopTypeFilter");
-  const desktopEraFilter = document.getElementById("desktopEraFilter");
-  const desktopFilterGroup = document.getElementById("desktopFilterGroup");
 
-  // Mobile filters
-  const memberFilter = document.getElementById("memberFilter");
-  const typeFilter = document.getElementById("typeFilter");
-  const eraFilter = document.getElementById("eraFilter");
-  const mobileFilterGroup = document.getElementById("mobileFilterGroup");
+/* =====================================================
+   2. ELEMENTS
+===================================================== */
 
-  // Modal filters
-  const modalMemberFilter = document.getElementById("modalMemberFilter");
-  const modalTypeFilter = document.getElementById("modalTypeFilter");
-  const modalEraFilter = document.getElementById("modalEraFilter");
+const pcGrid = document.getElementById("pcGrid");
+const emptyState = document.getElementById("emptyState");
+const searchInput = document.getElementById("searchInput");
 
-  // Reset buttons
-  const resetBtn = document.getElementById("resetBtn");
-  const desktopResetBtn = document.getElementById("desktopResetBtn");
-  const emptyResetBtn = document.getElementById("emptyResetBtn");
-  const modalResetFiltersBtn = document.getElementById("modalResetFiltersBtn");
+const memberFilter = document.getElementById("memberFilter");
+const categoryFilter = document.getElementById("categoryFilter");
+const typeFilter = document.getElementById("typeFilter");
+const eraFilter = document.getElementById("eraFilter");
 
-  // Sidebar nav
-  const photocardNavBtn = document.getElementById("photocardNavBtn");
-  const collectionNavBtn = document.getElementById("collectionNavBtn");
+const totalCount = document.getElementById("totalCount");
+const jenoCount = document.getElementById("jenoCount");
+const jaeminCount = document.getElementById("jaeminCount");
+const unitCount = document.getElementById("unitCount");
+const otherCount = document.getElementById("otherCount");
 
-  // Bottom nav
-  const photocardTab = document.getElementById("photocardTab");
-  const collectionTab = document.getElementById("collectionTab");
-  const infoTab = document.getElementById("infoTab");
+const emptyResetBtn = document.getElementById("emptyResetBtn");
 
-  // Floating / utility buttons
-  const surpriseFloatBtn = document.getElementById("surpriseFloatBtn");
-  const sidebarHandleBtn = document.getElementById("sidebarHandleBtn");
-  const scrollTopBtn = document.getElementById("scrollTopBtn");
+const shelfSearchInput = document.getElementById("shelfSearchInput");
+const shelfGrid = document.getElementById("shelfGrid");
+const shelfCount = document.getElementById("shelfCount");
 
-  // Settings modal
-  const desktopSettingsBtn = document.getElementById("desktopSettingsBtn");
-  const settingsModal = document.getElementById("settingsModal");
-  const settingsBackdrop = document.getElementById("settingsBackdrop");
-  const closeSettingsBtn = document.getElementById("closeSettingsBtn");
+const shelfJenoOwned = document.getElementById("shelfJenoOwned");
+const shelfJenoTotal = document.getElementById("shelfJenoTotal");
+const shelfJaeminOwned = document.getElementById("shelfJaeminOwned");
+const shelfJaeminTotal = document.getElementById("shelfJaeminTotal");
+const shelfUnitOwned = document.getElementById("shelfUnitOwned");
+const shelfUnitTotal = document.getElementById("shelfUnitTotal");
+const shelfOtherOwned = document.getElementById("shelfOtherOwned");
+const shelfOtherTotal = document.getElementById("shelfOtherTotal");
 
-  // Filter modal
-  const openFiltersBtn = document.getElementById("openFiltersBtn");
-  const desktopOpenFiltersBtn = document.getElementById("desktopOpenFiltersBtn");
-  const filtersModal = document.getElementById("filtersModal");
-  const filtersBackdrop = document.getElementById("filtersBackdrop");
-  const closeFiltersBtn = document.getElementById("closeFiltersBtn");
-  const modalApplyFiltersBtn = document.getElementById("modalApplyFiltersBtn");
+const shelfMemberFilter = document.getElementById("shelfMemberFilter");
+const shelfCategoryFilter = document.getElementById("shelfCategoryFilter");
+const shelfTypeFilter = document.getElementById("shelfTypeFilter");
+const shelfEraFilter = document.getElementById("shelfEraFilter");
+const shelfStatusFilters = document.getElementById("shelfStatusFilters");
 
-  // Theme
-  const themeButtons = document.querySelectorAll(".theme-option");
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+const scrollRows = document.querySelectorAll(".scroll-row");
 
-  // Summary
-  const mobileSummary = document.getElementById("mobileSummary");
-  const desktopSummary = document.getElementById("desktopSummary");
+const filtersModal = document.getElementById("filtersModal");
+const openFiltersBtn = document.getElementById("openFiltersBtn");
+const openShelfFiltersBtn = document.getElementById("openShelfFiltersBtn");
+const filtersBackdrop = document.getElementById("filtersBackdrop");
+const closeFiltersBtn = document.getElementById("closeFiltersBtn");
+const modalResetFiltersBtn = document.getElementById("modalResetFiltersBtn");
+const modalApplyFiltersBtn = document.getElementById("modalApplyFiltersBtn");
 
-  const mobileSumTotal = document.getElementById("mobileSumTotal");
-  const mobileSumJeno = document.getElementById("mobileSumJeno");
-  const mobileSumJaemin = document.getElementById("mobileSumJaemin");
-  const mobileSumUnit = document.getElementById("mobileSumUnit");
-  const mobileSumOther = document.getElementById("mobileSumOther");
+const settingsModal = document.getElementById("settingsModal");
+const settingsBackdrop = document.getElementById("settingsBackdrop");
+const closeSettingsBtn = document.getElementById("closeSettingsBtn");
 
-  const desktopSumTotal = document.getElementById("desktopSumTotal");
-  const desktopSumJeno = document.getElementById("desktopSumJeno");
-  const desktopSumJaemin = document.getElementById("desktopSumJaemin");
-  const desktopSumUnit = document.getElementById("desktopSumUnit");
-  const desktopSumOther = document.getElementById("desktopSumOther");
+const homeTab = document.getElementById("homeTab");
+const galleryTab = document.getElementById("galleryTab");
+const shelfTab = document.getElementById("shelfTab");
+const moreTab = document.getElementById("moreTab");
 
-  const mobileSumOtherItem = mobileSumOther ? mobileSumOther.closest(".scroll-item") : null;
-  const desktopSumOtherItem = desktopSumOther ? desktopSumOther.closest("span") : null;
+const homePage = document.getElementById("homePage");
+const galleryPage = document.getElementById("galleryPage");
+const shelfPage = document.getElementById("shelfPage");
 
-  /* =====================================================
-     STATE
-  ===================================================== */
+const eraSpotlightTitle = document.getElementById("eraSpotlightTitle");
+const eraSpotlightSubtitle = document.getElementById("eraSpotlightSubtitle");
 
-  const state = {
-    page: "photocard",
-    search: "",
-    member: "all",
-    type: "all",
-    era: "all"
+const pcDetailModal = document.getElementById("pcDetailModal");
+const pcDetailBackdrop = document.getElementById("pcDetailBackdrop");
+const closePcDetailBtn = document.getElementById("closePcDetailBtn");
+
+const pcDetailImage = document.getElementById("pcDetailImage");
+const pcDetailMember = document.getElementById("pcDetailMember");
+const pcDetailName = document.getElementById("pcDetailName");
+const pcDetailEra = document.getElementById("pcDetailEra");
+const pcDetailType = document.getElementById("pcDetailType");
+const pcDetailCategory = document.getElementById("pcDetailCategory");
+
+const themeButtons = document.querySelectorAll(".theme-option");
+
+
+/* =====================================================
+   3. FILTER STATE
+===================================================== */
+
+let activeFilterTarget = "gallery";
+let selectedShelfStatus = "all";
+
+const filterState = {
+  gallery: {
+    members: new Set(),
+    categories: new Set(),
+    types: new Set(),
+    eras: new Set()
+  },
+
+  shelf: {
+    members: new Set(),
+    categories: new Set(),
+    types: new Set(),
+    eras: new Set()
+  }
+};
+
+
+/* =====================================================
+   4. HELPERS
+===================================================== */
+
+function normalizeValue(value) {
+  return String(value || "").toLowerCase();
+}
+
+function getItemMember(item) {
+  return normalizeValue(item.member);
+}
+
+function getItemCategory(item) {
+  return normalizeValue(item.category);
+}
+
+function getItemType(item) {
+  return normalizeValue(item.type);
+}
+
+function getItemEra(item) {
+  return normalizeValue(item.era);
+}
+
+function getSearchText(item) {
+  return [
+    item.name,
+    item.member,
+    item.category,
+    item.type,
+    item.typeLabel,
+    item.era,
+    item.eraName
+  ].join(" ").toLowerCase();
+}
+
+function formatLabel(text) {
+  if (!text) return "";
+
+  return String(text)
+    .replaceAll("-", " ")
+    .replace(/\b\w/g, char => char.toUpperCase());
+}
+
+function getUniqueValues(items, getter) {
+  return [...new Set(items.map(getter).filter(Boolean))];
+}
+
+function getActiveState() {
+  return filterState[activeFilterTarget];
+}
+
+function countByMember(items, member) {
+  return items.filter(item => getItemMember(item) === member).length;
+}
+
+function getItemId(item) {
+  return item.id || `${item.member}-${item.era}-${item.name}`;
+}
+
+
+/* =====================================================
+   5. PC STATUS STORAGE
+===================================================== */
+
+function getPcStatus(item) {
+  return localStorage.getItem(`pc-status-${getItemId(item)}`) || "unmarked";
+}
+
+function setPcStatus(item, status) {
+  const key = `pc-status-${getItemId(item)}`;
+
+  if (status === "unmarked") {
+    localStorage.removeItem(key);
+  } else {
+    localStorage.setItem(key, status);
+  }
+}
+
+
+/* =====================================================
+   6. SUMMARY COUNTS
+===================================================== */
+
+function updateSummaryCounts(items) {
+  if (totalCount) {
+    totalCount.textContent = items.length;
+  }
+
+  if (jenoCount) {
+    jenoCount.textContent = countByMember(items, "jeno");
+  }
+
+  if (jaeminCount) {
+    jaeminCount.textContent = countByMember(items, "jaemin");
+  }
+
+  if (unitCount) {
+    unitCount.textContent = countByMember(items, "unit");
+  }
+
+  if (otherCount) {
+    otherCount.textContent = countByMember(items, "other");
+  }
+}
+
+function updateShelfSummary() {
+  const shelfItems = getShelfItems();
+
+  if (shelfCount) {
+    shelfCount.textContent = `${shelfItems.length} / ${allItems.length}`;
+  }
+
+  const members = [
+    ["jeno", shelfJenoOwned, shelfJenoTotal],
+    ["jaemin", shelfJaeminOwned, shelfJaeminTotal],
+    ["unit", shelfUnitOwned, shelfUnitTotal],
+    ["other", shelfOtherOwned, shelfOtherTotal]
+  ];
+
+  members.forEach(([member, ownedElement, totalElement]) => {
+    if (ownedElement) {
+      ownedElement.textContent = countByMember(shelfItems, member);
+    }
+
+    if (totalElement) {
+      totalElement.textContent = countByMember(allItems, member);
+    }
+  });
+}
+
+
+/* =====================================================
+   7. FILTER STORAGE
+===================================================== */
+
+function saveGallerySelectFilters() {
+  if (!memberFilter || !categoryFilter || !typeFilter || !eraFilter) return;
+
+  localStorage.setItem("memberFilter", memberFilter.value);
+  localStorage.setItem("categoryFilter", categoryFilter.value);
+  localStorage.setItem("typeFilter", typeFilter.value);
+  localStorage.setItem("eraFilter", eraFilter.value);
+}
+
+function loadSavedGallerySelectFilters() {
+  if (!memberFilter || !categoryFilter || !typeFilter || !eraFilter) return;
+
+  memberFilter.value = localStorage.getItem("memberFilter") || "all";
+  categoryFilter.value = localStorage.getItem("categoryFilter") || "all";
+  typeFilter.value = localStorage.getItem("typeFilter") || "all";
+  eraFilter.value = localStorage.getItem("eraFilter") || "all";
+}
+
+function clearSavedGallerySelectFilters() {
+  localStorage.removeItem("memberFilter");
+  localStorage.removeItem("categoryFilter");
+  localStorage.removeItem("typeFilter");
+  localStorage.removeItem("eraFilter");
+}
+
+
+/* =====================================================
+   8. GALLERY FILTER LOGIC
+===================================================== */
+
+function getFilteredItems() {
+  const searchKeyword = normalizeValue(searchInput?.value || "");
+  const state = filterState.gallery;
+
+  const selectedMember = memberFilter?.value || "all";
+  const selectedCategory = categoryFilter?.value || "all";
+  const selectedType = typeFilter?.value || "all";
+  const selectedEra = eraFilter?.value || "all";
+
+  return allItems.filter(item => {
+    const itemMember = getItemMember(item);
+    const itemCategory = getItemCategory(item);
+    const itemType = getItemType(item);
+    const itemEra = getItemEra(item);
+
+    const matchSearch =
+      searchKeyword === "" || getSearchText(item).includes(searchKeyword);
+
+    const matchFrontMember =
+      selectedMember === "all" || itemMember === selectedMember;
+
+    const matchFrontCategory =
+      selectedCategory === "all" || itemCategory === selectedCategory;
+
+    const matchFrontType =
+      selectedType === "all" || itemType === selectedType;
+
+    const matchFrontEra =
+      selectedEra === "all" || itemEra === selectedEra;
+
+    const matchModalMember =
+      state.members.size === 0 || state.members.has(itemMember);
+
+    const matchModalCategory =
+      state.categories.size === 0 || state.categories.has(itemCategory);
+
+    const matchModalType =
+      state.types.size === 0 || state.types.has(itemType);
+
+    const matchModalEra =
+      state.eras.size === 0 || state.eras.has(itemEra);
+
+    return (
+      matchSearch &&
+      matchFrontMember &&
+      matchFrontCategory &&
+      matchFrontType &&
+      matchFrontEra &&
+      matchModalMember &&
+      matchModalCategory &&
+      matchModalType &&
+      matchModalEra
+    );
+  });
+}
+
+
+/* =====================================================
+   9. MY SHELF FILTER LOGIC
+===================================================== */
+
+function getShelfItems() {
+  return allItems.filter(item => getPcStatus(item) !== "unmarked");
+}
+
+function getFilteredShelfItems() {
+  const shelfItems = getShelfItems();
+  const searchKeyword = normalizeValue(shelfSearchInput?.value || "");
+  const state = filterState.shelf;
+
+  const selectedMember = shelfMemberFilter?.value || "all";
+  const selectedCategory = shelfCategoryFilter?.value || "all";
+  const selectedType = shelfTypeFilter?.value || "all";
+  const selectedEra = shelfEraFilter?.value || "all";
+
+  return shelfItems.filter(item => {
+    const itemMember = getItemMember(item);
+    const itemCategory = getItemCategory(item);
+    const itemType = getItemType(item);
+    const itemEra = getItemEra(item);
+    const itemStatus = getPcStatus(item);
+
+    const matchSearch =
+      searchKeyword === "" || getSearchText(item).includes(searchKeyword);
+
+    const matchFrontMember =
+      selectedMember === "all" || itemMember === selectedMember;
+
+    const matchFrontCategory =
+      selectedCategory === "all" || itemCategory === selectedCategory;
+
+    const matchFrontType =
+      selectedType === "all" || itemType === selectedType;
+
+    const matchFrontEra =
+      selectedEra === "all" || itemEra === selectedEra;
+
+    const matchModalMember =
+      state.members.size === 0 || state.members.has(itemMember);
+
+    const matchModalCategory =
+      state.categories.size === 0 || state.categories.has(itemCategory);
+
+    const matchModalType =
+      state.types.size === 0 || state.types.has(itemType);
+
+    const matchModalEra =
+      state.eras.size === 0 || state.eras.has(itemEra);
+
+    const matchStatus =
+      selectedShelfStatus === "all" || itemStatus === selectedShelfStatus;
+
+    return (
+      matchSearch &&
+      matchFrontMember &&
+      matchFrontCategory &&
+      matchFrontType &&
+      matchFrontEra &&
+      matchModalMember &&
+      matchModalCategory &&
+      matchModalType &&
+      matchModalEra &&
+      matchStatus
+    );
+  });
+}
+
+
+/* =====================================================
+   10. FILTER LABELS / ACTIVE STATE
+===================================================== */
+
+function getSelectedChipTexts(groupSelector, selectedSet, defaultText) {
+  if (selectedSet.size === 0) return defaultText;
+
+  const texts = [];
+
+  document.querySelectorAll(`${groupSelector} .filter-chip`).forEach(chip => {
+    if (selectedSet.has(chip.dataset.value)) {
+      texts.push(chip.textContent.trim());
+    }
+  });
+
+  return texts.join(", ");
+}
+
+function resizeSelect(select) {
+  if (!select || !select.options || select.selectedIndex < 0) return;
+
+  const temp = document.createElement("span");
+
+  temp.style.visibility = "hidden";
+  temp.style.position = "absolute";
+  temp.style.whiteSpace = "nowrap";
+  temp.style.font = window.getComputedStyle(select).font;
+  temp.textContent = select.options[select.selectedIndex].text;
+
+  document.body.appendChild(temp);
+  select.style.width = `${Math.min(temp.offsetWidth + 60, 220)}px`;
+  document.body.removeChild(temp);
+}
+
+function updateFilterLabels(target = activeFilterTarget) {
+  const state = filterState[target];
+
+  const targetMemberFilter = target === "shelf" ? shelfMemberFilter : memberFilter;
+  const targetCategoryFilter = target === "shelf" ? shelfCategoryFilter : categoryFilter;
+  const targetTypeFilter = target === "shelf" ? shelfTypeFilter : typeFilter;
+  const targetEraFilter = target === "shelf" ? shelfEraFilter : eraFilter;
+
+  if (targetMemberFilter) {
+    targetMemberFilter.querySelector('option[value="all"]').textContent =
+      getSelectedChipTexts("#modalMemberChips", state.members, "Member");
+  }
+
+  if (targetCategoryFilter) {
+    targetCategoryFilter.querySelector('option[value="all"]').textContent =
+      getSelectedChipTexts("#modalCategoryChips", state.categories, "Category");
+  }
+
+  if (targetTypeFilter) {
+    targetTypeFilter.querySelector('option[value="all"]').textContent =
+      getSelectedChipTexts("#modalTypeChips", state.types, "Type");
+  }
+
+  if (targetEraFilter) {
+    targetEraFilter.querySelector('option[value="all"]').textContent =
+      getSelectedChipTexts("#modalEraChips", state.eras, "Era");
+  }
+}
+
+function updateSelectActiveState(target = activeFilterTarget) {
+  const state = filterState[target];
+
+  const selects = target === "shelf"
+    ? [
+        [shelfMemberFilter, state.members],
+        [shelfCategoryFilter, state.categories],
+        [shelfTypeFilter, state.types],
+        [shelfEraFilter, state.eras]
+      ]
+    : [
+        [memberFilter, state.members],
+        [categoryFilter, state.categories],
+        [typeFilter, state.types],
+        [eraFilter, state.eras]
+      ];
+
+  selects.forEach(([select, selectedSet]) => {
+    if (!select) return;
+
+    const isActive = select.value !== "all" || selectedSet.size > 0;
+
+    select.classList.toggle("active", isActive);
+    resizeSelect(select);
+  });
+}
+
+function syncModalChipsToTarget() {
+  const state = getActiveState();
+
+  const groups = [
+    ["#modalMemberChips", state.members],
+    ["#modalCategoryChips", state.categories],
+    ["#modalTypeChips", state.types],
+    ["#modalEraChips", state.eras]
+  ];
+
+  groups.forEach(([selector, selectedSet]) => {
+    document.querySelectorAll(`${selector} .filter-chip`).forEach(chip => {
+      chip.classList.toggle("active", selectedSet.has(chip.dataset.value));
+    });
+  });
+}
+
+function clearChipGroup(selectedSet, groupSelector) {
+  selectedSet.clear();
+
+  document.querySelectorAll(`${groupSelector} .filter-chip`).forEach(chip => {
+    chip.classList.remove("active");
+  });
+}
+
+function clearAllTargetChips(target = activeFilterTarget) {
+  const state = filterState[target];
+
+  state.members.clear();
+  state.categories.clear();
+  state.types.clear();
+  state.eras.clear();
+
+  document.querySelectorAll(".filter-chip").forEach(chip => {
+    chip.classList.remove("active");
+  });
+}
+
+
+/* =====================================================
+   11. RENDER GALLERY ITEMS
+===================================================== */
+
+function renderItems(items) {
+  if (!pcGrid || !emptyState) return;
+
+  pcGrid.innerHTML = "";
+
+  if (items.length === 0) {
+    emptyState.hidden = false;
+    return;
+  }
+
+  emptyState.hidden = true;
+
+  const grid = document.createElement("div");
+  grid.className = "pc-grid";
+
+  items.forEach(item => {
+    const card = createItemCard(item);
+    grid.appendChild(card);
+  });
+
+  pcGrid.appendChild(grid);
+}
+
+function createItemCard(item) {
+  const card = document.createElement("article");
+  card.className = "pc-card";
+
+  const name = item.name || "Untitled item";
+  const image = item.image || "";
+  const member = getItemMember(item);
+
+  const status = getPcStatus(item);
+
+  const statusLabelMap = {
+    "dont-collect": "❌",
+    "wishlist": "🛒",
+    "on-the-way": "🚚",
+    "collected": "✔️"
   };
 
-  /* =====================================================
-     CONFIG
-  ===================================================== */
+  const statusBadge = statusLabelMap[status] || "";
 
-  const itemTypeLabels = {
-    photocard: "Photocard",
-    narcissism: "Narcissism",
-    merch: "Merchandise",
-    doll: "Doll",
-    etc: "Etc",
-    other: "Other"
-  };
+  card.innerHTML = `
+    ${statusBadge ? `
+      <span class="pc-status-badge">
+        ${statusBadge}
+      </span>
+    ` : ""}
 
-  const typeOrder = {
-    album: 1,
+    <img
+      class="pc-image protected-image"
+      src="${image}"
+      alt="${name}"
+      loading="lazy"
+      decoding="async"
+      draggable="false"
+    >
 
-    pre_order_benefit: 2,
-    pob: 2,
+    <div class="pc-info">
+      <div class="pc-member">${formatLabel(member)}</div>
+      <h3 class="pc-title">${name}</h3>
+    </div>
+  `;
 
-    lucky_draw: 3,
-    ld: 3,
+  card.addEventListener("click", () => {
+    openPcDetail(item);
+  });
 
-    fan_sign: 4,
-    fs: 4,
+  return card;
+}
 
-    video_call_event: 5,
-    vce: 5,
-    fancall: 5,
 
-    fan_meeting: 6,
+/* =====================================================
+   12. RENDER MY SHELF ITEMS
+===================================================== */
 
-    photocard: 7,
-    pc: 7,
+function renderShelfItems(items) {
+  if (!shelfGrid) return;
 
-    merchandise: 8,
-    merch: 8,
+  shelfGrid.innerHTML = "";
 
-    apparel: 9,
-    jacket: 9,
+  if (items.length === 0) {
+    shelfGrid.innerHTML = `
+      <section class="empty-state shelf-empty-state">
+        <div class="empty-icon" aria-hidden="true">🗄️</div>
+        <h2>No shelf items yet</h2>
+        <p>Marked items will appear here.</p>
+      </section>
+    `;
+    return;
+  }
 
-    drinkware: 10,
-    tumbler: 10,
+  const grid = document.createElement("div");
+  grid.className = "pc-grid";
 
-    goods: 11,
-    md: 11,
+  items.forEach(item => {
+    const card = createItemCard(item);
+    grid.appendChild(card);
+  });
 
-    doll: 12,
+  shelfGrid.appendChild(grid);
+}
 
-    etc: 99,
-    other: 999
-  };
 
-  const typeLabels = {
-    album: "Album",
+/* =====================================================
+   13. HOME DASHBOARD
+===================================================== */
 
-    pre_order_benefit: "Pre-Order Benefit",
-    pob: "Pre-Order Benefit",
+function shuffleItems(items) {
+  return [...items].sort(() => Math.random() - 0.5);
+}
 
-    lucky_draw: "Lucky Draw",
-    ld: "Lucky Draw",
+function getRandomItems(items, limit = 3) {
+  return shuffleItems(items).slice(0, limit);
+}
 
-    fan_sign: "Fan Sign",
-    fs: "Fan Sign",
+function renderMiniItems(containerId, items) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
 
-    video_call_event: "Video Call Event",
-    vce: "Video Call Event",
-    fancall: "Video Call Event",
+  container.innerHTML = "";
 
-    fan_meeting: "Fan Meeting",
+  getRandomItems(items, 3).forEach(item => {
+    const card = document.createElement("article");
+    card.className = "home-card";
 
-    photocard: "Photocard",
-    pc: "Photocard",
+    const name = item.name || "Untitled item";
+    const image = item.image || "";
+    const brand = item.brand || item.member || "Archive";
+    const price = item.price || "";
 
-    merchandise: "Merchandise",
-    merch: "Merchandise",
+    card.innerHTML = `
+      <div class="home-card-image-wrap">
+        <img
+          class="home-card-image protected-image"
+          src="${image}"
+          alt="${name}"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        >
+      </div>
 
-    apparel: "Apparel",
-    jacket: "Apparel",
+      <div class="home-card-brand">${formatLabel(brand)}</div>
+      <h3 class="home-card-title">${name}</h3>
+      ${price ? `<p class="home-card-price">${price}</p>` : ""}
+    `;
 
-    drinkware: "Drinkware",
-    tumbler: "Drinkware",
+    card.addEventListener("click", () => {
+      openPcDetail(item);
+    });
 
-    goods: "Goods",
-    md: "Goods",
+    container.appendChild(card);
+  });
+}
 
-    doll: "Doll",
+function renderHomeDashboard() {
+  renderMiniItems("justDroppedGrid", allItems);
 
-    etc: "Etc",
-    other: "Other"
-  };
+  renderMiniItems(
+    "albumOnlyGrid",
+    allItems.filter(item => getItemType(item) === "album")
+  );
 
-  const eraOrder = {
-    the_first: 1,
-    we_young: 2,
-    empathy: 3,
-    we_go_up: 4,
-    we_boom: 5,
-    the_dream: 6,
-    reload: 7,
-    resonance_pt_1: 8,
-    resonance_pt_2: 9,
-    hot_sauce: 10,
-    hello_future: 11,
-    universe: 12,
-    smcu_express: 13,
-    glitch_mode: 14,
-    beatbox: 15,
-    beat_box: 15,
-    candy: 16,
-    smcu_palace: 17,
-    best_friend_ever: 18,
-    istj: 19,
-    golden_age: 20,
-    dreamscape: 21,
-    moonlight: 22,
-    the_culture_the_future: 23,
-    go_back_to_the_future: 24,
-    beat_it_up: 25,
-    both_sides: 26,
-    narcissism: 999
-  };
+  const eras = getUniqueValues(allItems, getItemEra);
+  const randomEra = eras.length ? getRandomItems(eras, 1)[0] : "";
+  const eraItems = allItems.filter(item => getItemEra(item) === randomEra);
 
-  const narcissismCategoryOrder = {
-    pc: 1,
-    photocard: 1,
-    photocards: 1,
+  if (eraSpotlightTitle) {
+    eraSpotlightTitle.textContent = randomEra
+      ? `${formatLabel(randomEra)} Spotlight 💙🩷💜`
+      : "Era Spotlight 💙🩷💜";
+  }
 
-    non_pc: 2,
-    nonpc: 2,
-    merch: 2,
-    merchandise: 2,
-    goods: 2,
-    md: 2,
+  if (eraSpotlightSubtitle) {
+    eraSpotlightSubtitle.textContent = randomEra
+      ? "Random picks from this era"
+      : "Random picks by era";
+  }
 
-    other: 999
-  };
+  renderMiniItems("eraSpotlightGrid", eraItems.length ? eraItems : allItems);
+}
 
-  /* =====================================================
-     DATA
-  ===================================================== */
 
-  const photocardData = [
-    ...(globalThis.theFirstData || []),
-    ...(globalThis.weYoungData || []),
-    ...(globalThis.empathyData || []),
-    ...(globalThis.weGoUpData || []),
-    ...(globalThis.weBoomData || []),
-    ...(globalThis.theDreamData || []),
-    ...(globalThis.reloadData || []),
-    ...(globalThis.resonancePt1Data || []),
-    ...(globalThis.resonancePt2Data || []),
-    ...(globalThis.hotSauceData || []),
-    ...(globalThis.helloFutureData || []),
-    ...(globalThis.universeData || []),
-    ...(globalThis.smcuExpressData || []),
-    ...(globalThis.glitchModeData || []),
-    ...(globalThis.beatBoxData || []),
-    ...(globalThis.candyData || []),
-    ...(globalThis.smcuPalaceData || []),
-    ...(globalThis.bestFriendEverData || []),
-    ...(globalThis.istjData || []),
-    ...(globalThis.goldenAgeData || []),
-    ...(globalThis.dreamscapeData || []),
-    ...(globalThis.moonlightData || []),
-    ...(globalThis.theCultureTheFutureData || []),
-    ...(globalThis.goBackToTheFutureData || []),
-    ...(globalThis.beatItUpData || []),
-    ...(globalThis.bothSidesData || [])
-  ].map((item, index) => ({
-    ...item,
-    itemType: item.itemType || "photocard",
-    sortIndex: item.sortIndex ?? index
-  }));
+/* =====================================================
+   14. APPLY / RESET FILTERS
+===================================================== */
 
-  const narcissismData = (globalThis.narcissismData || []).map((item, index) => {
-    const category = item.category || item.narcissismCategory || "non-pc";
-    const categoryKey = getNarcissismCategoryKey(category);
+function applyFilters() {
+  saveGallerySelectFilters();
 
-    return {
-      ...item,
-      itemType: categoryKey === "pc" ? "photocard" : "narcissism",
-      era: "Narcissism",
-      category,
-      sortIndex: item.sortIndex ?? index
+  updateFilterLabels("gallery");
+  updateSelectActiveState("gallery");
+  renderItems(getFilteredItems());
+  updateSummaryCounts(allItems);
+}
+
+function applyShelfFilters() {
+  updateFilterLabels("shelf");
+  updateSelectActiveState("shelf");
+  updateShelfSummary();
+  renderShelfItems(getFilteredShelfItems());
+}
+
+function resetFilters() {
+  if (memberFilter) memberFilter.value = "all";
+  if (categoryFilter) categoryFilter.value = "all";
+  if (typeFilter) typeFilter.value = "all";
+  if (eraFilter) eraFilter.value = "all";
+  if (searchInput) searchInput.value = "";
+
+  clearAllTargetChips("gallery");
+  clearSavedGallerySelectFilters();
+
+  applyFilters();
+}
+
+function resetShelfFilters() {
+  if (shelfMemberFilter) shelfMemberFilter.value = "all";
+  if (shelfCategoryFilter) shelfCategoryFilter.value = "all";
+  if (shelfTypeFilter) shelfTypeFilter.value = "all";
+  if (shelfEraFilter) shelfEraFilter.value = "all";
+  if (shelfSearchInput) shelfSearchInput.value = "";
+
+  selectedShelfStatus = "all";
+  clearAllTargetChips("shelf");
+  updateShelfStatusButtons();
+
+  applyShelfFilters();
+}
+
+
+/* =====================================================
+   15. MODAL FILTER CHIPS
+===================================================== */
+
+function setupChipGroup(groupSelector, key) {
+  document.querySelectorAll(`${groupSelector} .filter-chip`).forEach(chip => {
+    chip.addEventListener("click", () => {
+      const value = chip.dataset.value;
+      const state = getActiveState();
+      const selectedSet = state[key];
+
+      if (!value) return;
+
+      if (selectedSet.has(value)) {
+        selectedSet.delete(value);
+        chip.classList.remove("active");
+      } else {
+        selectedSet.add(value);
+        chip.classList.add("active");
+      }
+    });
+  });
+}
+
+function setupAllChipGroups() {
+  setupChipGroup("#modalMemberChips", "members");
+  setupChipGroup("#modalCategoryChips", "categories");
+  setupChipGroup("#modalTypeChips", "types");
+  setupChipGroup("#modalEraChips", "eras");
+}
+
+function openFiltersModal(target = "gallery") {
+  activeFilterTarget = target;
+
+  syncModalChipsToTarget();
+
+  if (filtersModal) {
+    filtersModal.hidden = false;
+  }
+}
+
+function closeFiltersModal() {
+  if (filtersModal) {
+    filtersModal.hidden = true;
+  }
+}
+
+function syncModalToSelect() {
+  const state = getActiveState();
+
+  const targetMemberFilter = activeFilterTarget === "shelf" ? shelfMemberFilter : memberFilter;
+  const targetCategoryFilter = activeFilterTarget === "shelf" ? shelfCategoryFilter : categoryFilter;
+  const targetTypeFilter = activeFilterTarget === "shelf" ? shelfTypeFilter : typeFilter;
+  const targetEraFilter = activeFilterTarget === "shelf" ? shelfEraFilter : eraFilter;
+
+  if (targetMemberFilter) {
+    targetMemberFilter.value = state.members.size === 1 ? [...state.members][0] : "all";
+  }
+
+  if (targetCategoryFilter) {
+    targetCategoryFilter.value = state.categories.size === 1 ? [...state.categories][0] : "all";
+  }
+
+  if (targetTypeFilter) {
+    targetTypeFilter.value = state.types.size === 1 ? [...state.types][0] : "all";
+  }
+
+  if (targetEraFilter) {
+    targetEraFilter.value = state.eras.size === 1 ? [...state.eras][0] : "all";
+  }
+}
+
+function applyModalFilters() {
+  syncModalToSelect();
+
+  if (activeFilterTarget === "shelf") {
+    applyShelfFilters();
+  } else {
+    applyFilters();
+  }
+
+  closeFiltersModal();
+}
+
+function resetModalFilters() {
+  if (activeFilterTarget === "shelf") {
+    resetShelfFilters();
+  } else {
+    resetFilters();
+  }
+
+  syncModalChipsToTarget();
+}
+
+
+/* =====================================================
+   16. PC DETAIL MODAL
+===================================================== */
+
+function openPcDetail(item) {
+  if (!pcDetailModal) return;
+
+  if (pcDetailImage) {
+    pcDetailImage.src = item.image || "";
+    pcDetailImage.alt = item.name || "";
+    pcDetailImage.loading = "lazy";
+    pcDetailImage.decoding = "async";
+    pcDetailImage.draggable = false;
+  }
+
+  if (pcDetailMember) {
+    pcDetailMember.textContent = formatLabel(item.member);
+  }
+
+  if (pcDetailName) {
+    pcDetailName.textContent = item.name || "Untitled item";
+  }
+
+  if (pcDetailEra) {
+    pcDetailEra.textContent = item.eraName || formatLabel(item.era);
+  }
+
+  if (pcDetailType) {
+    pcDetailType.textContent = item.typeLabel || formatLabel(item.type);
+  }
+
+  if (pcDetailCategory) {
+    pcDetailCategory.textContent = item.categoryLabel || formatLabel(item.category);
+  }
+
+  document.querySelectorAll(".pc-status-btn").forEach(button => {
+    const status = button.dataset.status;
+
+    button.classList.toggle("active", status === getPcStatus(item));
+
+    button.onclick = () => {
+      setPcStatus(item, status);
+
+      document.querySelectorAll(".pc-status-btn").forEach(btn => {
+        btn.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      applyFilters();
+      applyShelfFilters();
     };
   });
 
-  const merchData = (globalThis.merchData || []).map((item, index) => ({
-    ...item,
-    itemType: item.itemType || "merch",
-    sortIndex: item.sortIndex ?? index
-  }));
+  pcDetailModal.hidden = false;
+}
 
-  const dollData = (globalThis.dollData || []).map((item, index) => ({
-    ...item,
-    itemType: item.itemType || "doll",
-    sortIndex: item.sortIndex ?? index
-  }));
-
-  const etcData = (globalThis.etcData || []).map((item, index) => ({
-    ...item,
-    itemType: item.itemType || "etc",
-    sortIndex: item.sortIndex ?? index
-  }));
-
-  const allData = [
-    ...photocardData,
-    ...narcissismData,
-    ...merchData,
-    ...dollData,
-    ...etcData
-  ].map((item, index) => ({
-    ...item,
-    collectionIndex: index
-  }));
-
-  /* =====================================================
-     NORMALIZE HELPERS
-  ===================================================== */
-
-  function normalizeValue(value) {
-    return String(value || "").toLowerCase().trim();
-  }
-
-  function normalizeKey(value) {
-    return String(value || "")
-      .toLowerCase()
-      .trim()
-      .replace(/&/g, "and")
-      .replace(/['’]/g, "")
-      .replace(/[^a-z0-9]+/g, "_")
-      .replace(/^_+|_+$/g, "");
-  }
-
-  function formatMemberName(member) {
-    const key = normalizeValue(member);
-
-    if (key === "jeno") return "Jeno";
-    if (key === "jaemin") return "Jaemin";
-    if (key === "unit") return "Unit";
-    if (key === "other") return "Other";
+function closePcDetail() {
+  if (!pcDetailModal) return;
+  pcDetailModal.hidden = true;
+}
 
 
-    return String(member || "")
-      .toLowerCase()
-      .replace(/\b\w/g, (letter) => letter.toUpperCase());
-  }
+/* =====================================================
+   17. SHELF STATUS FILTER
+===================================================== */
 
-  function compareText(a, b) {
-    return String(a || "").localeCompare(String(b || ""), "en", {
-      sensitivity: "base",
-      numeric: true
+function updateShelfStatusButtons() {
+  document.querySelectorAll(".shelf-status-chip").forEach(button => {
+    button.classList.toggle("active", button.dataset.status === selectedShelfStatus);
+  });
+}
+
+function setupShelfStatusFilter() {
+  if (!shelfStatusFilters) return;
+
+  shelfStatusFilters.querySelectorAll(".shelf-status-chip").forEach(button => {
+    button.addEventListener("click", () => {
+      selectedShelfStatus = button.dataset.status || "all";
+
+      updateShelfStatusButtons();
+      applyShelfFilters();
     });
+  });
+}
+
+
+/* =====================================================
+   18. PAGE NAVIGATION
+===================================================== */
+
+function setActiveTab(activeButton) {
+  document.querySelectorAll(".bottom-nav-item").forEach(button => {
+    button.classList.remove("is-active");
+  });
+
+  if (activeButton) {
+    activeButton.classList.add("is-active");
   }
+}
 
-  function getImageSrc(item) {
-    return String(item.img || item.image || item.src || "").trim();
-  }
+function switchPage(pageName) {
+  window.location.hash = pageName;
 
-  function getItemTypeKey(itemType) {
-    const key = normalizeKey(itemType);
+  if (homePage) homePage.hidden = pageName !== "home";
+  if (galleryPage) galleryPage.hidden = pageName !== "gallery";
+  if (shelfPage) shelfPage.hidden = pageName !== "shelf";
 
-    if (key === "pc") return "photocard";
-    if (key === "photo_card") return "photocard";
-    if (key === "photocard") return "photocard";
+  if (pageName === "home") renderHomeDashboard();
+  if (pageName === "gallery") applyFilters();
+  if (pageName === "shelf") applyShelfFilters();
+}
 
-    if (key === "narc") return "narcissism";
-    if (key === "narcissism") return "narcissism";
-
-    if (key === "md") return "merch";
-    if (key === "merch") return "merch";
-    if (key === "merchandise") return "merch";
-
-    if (key === "doll") return "doll";
-    if (key === "etc") return "etc";
-
-    return key || "other";
-  }
-
-  function getTypeKey(type) {
-    const key = normalizeKey(type);
-
-    if (key === "pre_order_benefit") return "pre_order_benefit";
-    if (key === "preorder_benefit") return "pre_order_benefit";
-    if (key === "pre_order") return "pre_order_benefit";
-    if (key === "pob") return "pob";
-
-    if (key === "lucky_draw") return "lucky_draw";
-    if (key === "lucky") return "lucky_draw";
-    if (key === "ld") return "ld";
-
-    if (key === "fan_sign") return "fan_sign";
-    if (key === "fansign") return "fan_sign";
-    if (key === "fs") return "fs";
-
-    if (key === "video_call_event") return "video_call_event";
-    if (key === "video_call") return "video_call_event";
-    if (key === "vce") return "vce";
-    if (key === "fancall") return "fancall";
-    if (key === "fan_call") return "fancall";
-
-    if (key === "fan_meeting") return "fan_meeting";
-    if (key === "fanmeeting") return "fan_meeting";
-
-    if (key === "photo_card") return "photocard";
-    if (key === "photocard") return "photocard";
-    if (key === "pc") return "pc";
-
-    if (key === "merchandise") return "merchandise";
-    if (key === "merch") return "merch";
-    if (key === "md") return "md";
-    if (key === "goods") return "goods";
-
-    if (key === "apparel") return "apparel";
-    if (key === "jacket") return "jacket";
-
-    if (key === "drinkware") return "drinkware";
-    if (key === "tumbler") return "tumbler";
-
-    if (key === "doll") return "doll";
-    if (key === "etc") return "etc";
-
-    return key || "other";
-  }
-
-  function getEraKey(era) {
-    return normalizeKey(era);
-  }
-
-  function getNarcissismCategoryKey(category) {
-    const key = normalizeKey(category);
-
-    if (key === "pc") return "pc";
-    if (key === "photo_card") return "pc";
-    if (key === "photocard") return "pc";
-    if (key === "photocards") return "pc";
-
-    if (key === "non_pc") return "non_pc";
-    if (key === "nonpc") return "non_pc";
-    if (key === "merch") return "non_pc";
-    if (key === "merchandise") return "non_pc";
-    if (key === "goods") return "non_pc";
-    if (key === "md") return "non_pc";
-
-    return key || "other";
-  }
-
-  function getTypeLabel(type) {
-    const key = getTypeKey(type);
-    return typeLabels[key] || type || "Other";
-  }
-
-  function getItemTypeLabel(itemType) {
-    const key = getItemTypeKey(itemType);
-    return itemTypeLabels[key] || itemType || "Other";
-  }
-
-  function getNarcissismCategoryLabel(category) {
-    const key = getNarcissismCategoryKey(category);
-
-    if (key === "pc") {
-      return "Narcissism PC";
-    }
-
-    if (key === "non_pc") {
-      return "Narcissism Non-PC";
-    }
-
-    return "Narcissism";
-  }
-
-  /* =====================================================
-     COMPARE HELPERS
-  ===================================================== */
-
-  function compareEra(a, b) {
-    const orderA = eraOrder[getEraKey(a)] || 9999;
-    const orderB = eraOrder[getEraKey(b)] || 9999;
-
-    if (orderA !== orderB) {
-      return orderA - orderB;
-    }
-
-    return compareText(a, b);
-  }
-
-  function compareType(a, b) {
-    const orderA = typeOrder[getTypeKey(a)] || 999;
-    const orderB = typeOrder[getTypeKey(b)] || 999;
-
-    if (orderA !== orderB) {
-      return orderA - orderB;
-    }
-
-    return compareText(a, b);
-  }
-
-  function compareNarcissismCategory(a, b) {
-    const orderA = narcissismCategoryOrder[getNarcissismCategoryKey(a)] || 999;
-    const orderB = narcissismCategoryOrder[getNarcissismCategoryKey(b)] || 999;
-
-    if (orderA !== orderB) {
-      return orderA - orderB;
-    }
-
-    return compareText(a, b);
-  }
-
-  /* =====================================================
-     SORT HELPERS
-  ===================================================== */
-
-  function sortPhotocards(items) {
-    return [...items].sort((a, b) => {
-      const eraCompare = compareEra(a.era, b.era);
-
-      if (eraCompare !== 0) {
-        return eraCompare;
-      }
-
-      const typeCompare = compareType(a.type, b.type);
-
-      if (typeCompare !== 0) {
-        return typeCompare;
-      }
-
-      const titleCompare = compareText(a.title, b.title);
-
-      if (titleCompare !== 0) {
-        return titleCompare;
-      }
-
-      return compareText(a.member, b.member);
-    });
-  }
-
-  function sortByTypeTitle(items) {
-    return [...items].sort((a, b) => {
-      const typeCompare = compareType(a.type, b.type);
-
-      if (typeCompare !== 0) {
-        return typeCompare;
-      }
-
-      const titleCompare = compareText(a.title, b.title);
-
-      if (titleCompare !== 0) {
-        return titleCompare;
-      }
-
-      return compareText(a.member, b.member);
-    });
-  }
-
-  function sortCollection(items) {
-    return [...items].sort((a, b) => {
-      return (b.collectionIndex || 0) - (a.collectionIndex || 0);
-    });
-  }
-
-  function groupBy(items, key) {
-    return items.reduce((groups, item) => {
-      const value = item[key] || "Other";
-
-      if (!groups[value]) {
-        groups[value] = [];
-      }
-
-      groups[value].push(item);
-      return groups;
-    }, {});
-  }
-
-  function getUniqueValues(data, key) {
-    return [...new Set(data.map((item) => item[key]).filter(Boolean))].sort(compareText);
-  }
-
-  /* =====================================================
-     FILTERING
-  ===================================================== */
-
-  function getBaseDataForPage() {
-    if (state.page === "photocard") {
-      return allData.filter((item) => {
-        return getItemTypeKey(item.itemType) === "photocard";
-      });
-    }
-
-    if (state.page === "narcissism") {
-      return allData.filter((item) => {
-        return getEraKey(item.era) === "narcissism";
-      });
-    }
-
-    if (state.page === "collection") {
-      return allData;
-    }
-
-    return allData;
-  }
-
-  function shouldUseMemberFilter() {
-    return state.page === "photocard" || state.page === "collection";
-  }
-
-  function shouldUseTypeFilter() {
-    return state.page === "photocard" || state.page === "collection";
-  }
-
-  function shouldUseEraFilter() {
-    return state.page === "photocard" || state.page === "collection";
-  }
-
-  function getFilteredData() {
-    const baseData = getBaseDataForPage();
-
-    return baseData.filter((item) => {
-      const searchValue = normalizeValue(state.search);
-
-      const text = [
-        item.title,
-        item.member,
-        item.type,
-        item.era,
-        item.info,
-        item.itemType,
-        item.category,
-        item.series
-      ]
-        .join(" ")
-        .toLowerCase();
-
-      const itemMember = normalizeValue(item.member);
-      const itemType = getTypeKey(item.type);
-      const itemItemType = getItemTypeKey(item.itemType);
-      const itemCategory = getNarcissismCategoryKey(item.category);
-      const itemEra = getEraKey(item.era);
-
-      const matchesSearch = !searchValue || text.includes(searchValue);
-
-      const matchesMember =
-        !shouldUseMemberFilter() ||
-        state.member === "all" ||
-        itemMember === normalizeValue(state.member);
-
-      const selectedType = getTypeKey(state.type);
-
-      const matchesType =
-        !shouldUseTypeFilter() ||
-        state.type === "all" ||
-        itemType === selectedType ||
-        itemItemType === selectedType ||
-        itemCategory === selectedType ||
-        (
-          selectedType === "merchandise" &&
-          (
-            itemType === "merch" ||
-            itemType === "goods" ||
-            itemType === "md" ||
-            itemItemType === "merch" ||
-            itemItemType === "narcissism" ||
-            itemCategory === "non_pc"
-          ));
-
-      const matchesEra =
-        !shouldUseEraFilter() ||
-        state.era === "all" ||
-        itemEra === getEraKey(state.era);
-
-      return (
-        matchesSearch &&
-        matchesMember &&
-        matchesType &&
-        matchesEra
-      );
-    });
-  }
-
-  /* =====================================================
-     DOM HELPERS
-  ===================================================== */
-
-  function clearPage() {
-    if (!pageRoot) return;
-
-    pageRoot.innerHTML = "";
-    pageRoot.className = "pc-page";
-  }
-
-  function showEmptyState() {
-    if (emptyState) {
-      emptyState.hidden = false;
-    }
-  }
-
-  function hideEmptyState() {
-    if (emptyState) {
-      emptyState.hidden = true;
-    }
-  }
-
-  function scrollToPageTop() {
-    if (!pageRoot) return;
-
-    pageRoot.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
-
-  function createSection(title, count) {
-    const section = document.createElement("section");
-    section.className = "pc-section";
-
-    const itemLabel = count === 1 ? "item" : "items";
-
-    section.innerHTML = `
-      <div class="pc-section-head">
-        <div>
-          <h2>${title || "Untitled"}</h2>
-        </div>
-        <span>${count || 0} ${itemLabel}</span>
-      </div>
-    `;
-
-    return section;
-  }
-
-  function createCardGrid(items) {
-    const grid = document.createElement("div");
-    grid.className = "pc-grid";
-
-    items.forEach((item) => {
-      grid.appendChild(createCard(item));
-    });
-
-    return grid;
-  }
-
-  function createCard(item) {
-    const card = document.createElement("article");
-    card.className = "pc-card";
-
-    const imageSrc = getImageSrc(item);
-    const hasImage = imageSrc.length > 0;
-
-    const imageWrap = document.createElement("div");
-    imageWrap.className = "pc-image-wrap";
-
-    if (!hasImage) {
-      imageWrap.classList.add("no-image");
-    }
-
-    const fallbackEmoji = document.createElement("span");
-    fallbackEmoji.className = "pc-fallback-emoji";
-    fallbackEmoji.setAttribute("aria-hidden", "true");
-    fallbackEmoji.textContent = "🐶 🐰";
-
-    imageWrap.appendChild(fallbackEmoji);
-
-    if (hasImage) {
-      const img = document.createElement("img");
-
-      img.src = imageSrc;
-      img.alt = item.title || "";
-      img.loading = "lazy";
-      img.draggable = false;
-
-      img.addEventListener("error", () => {
-        img.remove();
-        imageWrap.classList.add("no-image");
-      });
-
-      imageWrap.appendChild(img);
-    }
-
-    const textWrap = document.createElement("div");
-    textWrap.className = "pc-text";
-
-    const member = document.createElement("p");
-    member.className = "pc-member";
-    member.textContent = item.member || getItemTypeLabel(item.itemType);
-
-    const title = document.createElement("h3");
-    title.className = "pc-title";
-    title.textContent = item.title || "";
-
-    const info = document.createElement("p");
-    info.className = "pc-info";
-
-    if (item.info) {
-      info.textContent = item.info;
-    } else {
-      const infoParts = [
-        item.era,
-        getTypeLabel(item.type)
-      ].filter(Boolean);
-
-      info.textContent = infoParts.join(" · ");
-    }
-
-    textWrap.appendChild(member);
-    textWrap.appendChild(title);
-
-    if (info.textContent) {
-      textWrap.appendChild(info);
-    }
-
-    card.appendChild(imageWrap);
-    card.appendChild(textWrap);
-
-    return card;
-  }
-
-  /* =====================================================
-     SUMMARY / FILTER VISIBILITY
-  ===================================================== */
-
-  function updateSummary(items) {
-    const total = items.length;
-    const jeno = items.filter((item) => normalizeValue(item.member) === "jeno").length;
-    const jaemin = items.filter((item) => normalizeValue(item.member) === "jaemin").length;
-    const unit = items.filter((item) => normalizeValue(item.member) === "unit").length;
-
-    const other = state.page === "collection"
-      ? items.filter((item) => getItemTypeKey(item.itemType) !== "photocard").length
-      : items.filter((item) => {
-        const member = normalizeValue(item.member);
-
-        return (
-          member !== "jeno" &&
-          member !== "jaemin" &&
-          member !== "unit"
-        );
-      }).length;
-
-    if (mobileSumTotal) mobileSumTotal.textContent = total;
-    if (mobileSumJeno) mobileSumJeno.textContent = jeno;
-    if (mobileSumJaemin) mobileSumJaemin.textContent = jaemin;
-    if (mobileSumUnit) mobileSumUnit.textContent = unit;
-    if (mobileSumOther) mobileSumOther.textContent = other;
-
-    if (desktopSumTotal) desktopSumTotal.textContent = total;
-    if (desktopSumJeno) desktopSumJeno.textContent = jeno;
-    if (desktopSumJaemin) desktopSumJaemin.textContent = jaemin;
-    if (desktopSumUnit) desktopSumUnit.textContent = unit;
-    if (desktopSumOther) desktopSumOther.textContent = other;
-  }
-
-  function updateFilterVisibility() {
-    const isPhotocard = state.page === "photocard";
-    const isCollection = state.page === "collection";
-    const isNarcissism = state.page === "narcissism";
-
-    const showFullControls = isPhotocard || isCollection;
-    const showSummary = isPhotocard || isCollection || isNarcissism;
-
-    const memberFilters = [
-      desktopMemberFilter,
-      memberFilter,
-      modalMemberFilter
-    ];
-
-    const typeFilters = [
-      desktopTypeFilter,
-      typeFilter,
-      modalTypeFilter
-    ];
-
-    const eraFilters = [
-      desktopEraFilter,
-      eraFilter,
-      modalEraFilter
-    ];
-
-    memberFilters.forEach((select) => {
-      if (select) select.hidden = !showFullControls;
-    });
-
-    typeFilters.forEach((select) => {
-      if (select) select.hidden = !showFullControls;
-    });
-
-    eraFilters.forEach((select) => {
-      if (select) select.hidden = !showFullControls;
-    });
-
-    if (desktopSummary) {
-      desktopSummary.hidden = !showSummary;
-    }
-
-    if (mobileSummary) {
-      mobileSummary.hidden = !showSummary;
-    }
-
-    const showOtherSummary = state.page === "collection";
-
-    if (mobileSumOtherItem) {
-      mobileSumOtherItem.hidden = !showOtherSummary;
-    }
-
-    if (desktopSumOtherItem) {
-      desktopSumOtherItem.hidden = !showOtherSummary;
-    }
-
-    if (desktopFilterGroup) {
-      desktopFilterGroup.hidden = !showFullControls;
-    }
-
-    if (mobileFilterGroup) {
-      mobileFilterGroup.hidden = !showFullControls;
-    }
-
-    if (openFiltersBtn) {
-      openFiltersBtn.hidden = !showFullControls;
-    }
-  }
-
-  const showOtherSummary = state.page === "collection";
-
-  if (mobileSumOtherItem) {
-    mobileSumOtherItem.hidden = !showOtherSummary;
-  }
-
-  if (desktopSumOtherItem) {
-    desktopSumOtherItem.hidden = !showOtherSummary;
-  }
-  
-  /* =====================================================
-     FILTER OPTIONS
-  ===================================================== */
-
-  function populateSelect(select, values, label, normalizer = normalizeValue, formatter = null) {
-    if (!select) return;
-
-    const currentValue = select.value || "all";
-
-    select.innerHTML = "";
-
-    const allOption = document.createElement("option");
-    allOption.value = "all";
-    allOption.textContent = label;
-    select.appendChild(allOption);
-
-    values.forEach((value) => {
-      const option = document.createElement("option");
-      const normalized = normalizer(value);
-
-      option.value = normalized;
-      option.textContent = formatter ? formatter(value) : value;
-
-      select.appendChild(option);
-    });
-
-    if ([...select.options].some((option) => option.value === currentValue)) {
-      select.value = currentValue;
-    }
-  }
-
-  function setupFilterOptions() {
-    const members = getUniqueValues(allData, "member");
-    const types = getUniqueValues(allData, "type");
-    const eras = getUniqueValues(allData, "era");
-
-    [
-      desktopMemberFilter,
-      memberFilter,
-      modalMemberFilter
-    ].forEach((select) => {
-      populateSelect(select, members, "All Members", normalizeValue);
-    });
-
-    [
-      desktopTypeFilter,
-      typeFilter,
-      modalTypeFilter
-    ].forEach((select) => {
-      populateSelect(select, types, "All Types", getTypeKey, getTypeLabel);
-    });
-
-    [
-      desktopEraFilter,
-      eraFilter,
-      modalEraFilter
-    ].forEach((select) => {
-      populateSelect(select, eras, "All Eras", getEraKey);
-    });
-  }
-
-  function syncInputs() {
-    if (searchInput) {
-      searchInput.value = state.search;
-    }
-
-    [
-      desktopMemberFilter,
-      memberFilter,
-      modalMemberFilter
-    ].forEach((select) => {
-      if (select) select.value = state.member;
-    });
-
-    [
-      desktopTypeFilter,
-      typeFilter,
-      modalTypeFilter
-    ].forEach((select) => {
-      if (select) select.value = state.type;
-    });
-
-    [
-      desktopEraFilter,
-      eraFilter,
-      modalEraFilter
-    ].forEach((select) => {
-      if (select) select.value = state.era;
-    });
-  }
-
-  function resetFilters() {
-    state.search = "";
-    state.member = "all";
-    state.type = "all";
-    state.era = "all";
-
-    renderCurrentPage();
-  }
-
-  /* =====================================================
-     NAV STATE
-  ===================================================== */
-
-  function setActiveNav(page) {
-    state.page = page;
-    document.body.dataset.page = page;
-
-    const navButtons = [
-      photocardNavBtn,
-      collectionNavBtn,
-      photocardTab,
-      collectionTab,
-      infoTab
-    ];
-
-    navButtons.forEach((button) => {
-      if (!button) return;
-      button.classList.remove("is-active", "active");
-    });
-
-    if (page === "photocard") {
-      if (photocardNavBtn) photocardNavBtn.classList.add("is-active", "active");
-      if (photocardTab) photocardTab.classList.add("is-active", "active");
-    }
-
-    if (page === "collection") {
-      if (collectionNavBtn) collectionNavBtn.classList.add("is-active", "active");
-      if (collectionTab) collectionTab.classList.add("is-active", "active");
-    }
-
-    if (page === "settings") {
-      if (infoTab) infoTab.classList.add("is-active", "active");
-    }
-  }
-
-  /* =====================================================
-     RENDER PAGES
-  ===================================================== */
-
-  function renderCurrentPage() {
-    syncInputs();
-    updateFilterVisibility();
-
-    if (state.page === "photocard") {
-      renderPhotocardPage();
-      return;
-    }
-
-    if (state.page === "narcissism") {
-      renderNarcissismPage();
-      return;
-    }
-
-    if (state.page === "collection") {
-      renderCollectionPage();
-      return;
-    }
-
-    if (state.page === "surprise") {
-      renderSurprisePage();
-      return;
-    }
-
-    renderPhotocardPage();
-  }
-
-  function renderPhotocardPage() {
-    setActiveNav("photocard");
-    clearPage();
-    hideEmptyState();
-    updateFilterVisibility();
-
-    const filtered = sortPhotocards(getFilteredData());
-
-    updateSummary(filtered);
-
-    if (!filtered.length) {
-      showEmptyState();
-      return;
-    }
-
-    const eraGroups = groupBy(filtered, "era");
-
-    Object.keys(eraGroups)
-      .sort(compareEra)
-      .forEach((era) => {
-        const eraItems = sortPhotocards(eraGroups[era]);
-        const section = createSection(era, eraItems.length);
-
-        section.appendChild(createCardGrid(eraItems));
-        pageRoot.appendChild(section);
-      });
-  }
-
-  function renderNarcissismPage() {
-    setActiveNav("narcissism");
-    clearPage();
-    hideEmptyState();
-
-    state.member = "all";
-    state.type = "all";
-    state.era = "all";
-
-    syncInputs();
-    updateFilterVisibility();
-
-    const filtered = sortByTypeTitle(getFilteredData());
-
-    updateSummary(filtered);
-
-    if (!filtered.length) {
-      const emptySection = createSection("Narcissism", 0);
-
-      pageRoot.appendChild(emptySection);
-      showEmptyState();
-      return;
-    }
-
-    const categoryGroups = groupBy(filtered, "category");
-
-    Object.keys(categoryGroups)
-      .sort(compareNarcissismCategory)
-      .forEach((category) => {
-        const categoryItems = sortByTypeTitle(categoryGroups[category]);
-        const section = createSection(
-          getNarcissismCategoryLabel(category),
-          categoryItems.length
-        );
-
-        section.appendChild(createCardGrid(categoryItems));
-        pageRoot.appendChild(section);
-      });
-  }
-
-  function renderCollectionPage() {
-    setActiveNav("collection");
-    clearPage();
-    hideEmptyState();
-
-    syncInputs();
-    updateFilterVisibility();
-
-    const filtered = sortCollection(getFilteredData());
-
-    updateSummary(filtered);
-
-    if (!filtered.length) {
-      showEmptyState();
-      return;
-    }
-
-    const section = createSection("Collection", filtered.length);
-
-    section.appendChild(createCardGrid(filtered));
-    pageRoot.appendChild(section);
-  }
-
-  function renderSurprisePage() {
-    setActiveNav("surprise");
-    clearPage();
-    hideEmptyState();
-
-    const filtered = getFilteredData();
-
-    updateSummary(filtered);
-
-    if (!filtered.length) {
-      showEmptyState();
-      return;
-    }
-
-    const randomIndex = Math.floor(Math.random() * filtered.length);
-    const randomItem = filtered[randomIndex];
-
-    const section = createSection("Random Pick", 1);
-
-    const randomGrid = document.createElement("div");
-    randomGrid.className = "pc-grid surprise-grid";
-
-    const randomCard = createCard(randomItem);
-    randomCard.classList.add("is-random-picked");
-    randomGrid.appendChild(randomCard);
-
-    section.appendChild(randomGrid);
-
-    const shuffleButton = document.createElement("button");
-    shuffleButton.className = "btn btn--accent random-pick-btn";
-    shuffleButton.type = "button";
-    shuffleButton.setAttribute("aria-label", "Pick another random item");
-    shuffleButton.textContent = "🎲 Pick again";
-
-    shuffleButton.addEventListener("click", renderSurprisePage);
-
-    section.querySelector(".pc-section-head").appendChild(shuffleButton);
-    pageRoot.appendChild(section);
-  }
-
-  /* =====================================================
-     MODALS
-  ===================================================== */
-
-  function openSettings() {
-    if (!settingsModal) return;
-
+function openSettingsModal() {
+  if (settingsModal) {
     settingsModal.hidden = false;
-    document.body.style.overflow = "hidden";
-
-    if (infoTab) {
-      infoTab.classList.add("is-active", "active");
-    }
   }
+}
 
-  function closeSettings() {
-    if (!settingsModal) return;
-
+function closeSettingsModal() {
+  if (settingsModal) {
     settingsModal.hidden = true;
-    document.body.style.overflow = "";
-
-    if (infoTab) {
-      infoTab.classList.remove("is-active", "active");
-    }
   }
+}
 
-  function openFiltersModal() {
-    if (!filtersModal) return;
 
-    syncInputs();
-    updateFilterVisibility();
+/* =====================================================
+   19. DRAG SCROLL
+===================================================== */
 
-    filtersModal.hidden = false;
-    document.body.style.overflow = "hidden";
-  }
+function setupDragScroll() {
+  scrollRows.forEach(row => {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-  function closeFiltersModal() {
-    if (!filtersModal) return;
-
-    filtersModal.hidden = true;
-    document.body.style.overflow = "";
-  }
-
-  /* =====================================================
-     THEME
-  ===================================================== */
-
-  function getSystemTheme() {
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  }
-
-  function applyTheme(theme) {
-    const selectedTheme = theme === "system" ? getSystemTheme() : theme;
-    const activeTheme = selectedTheme === "dark" ? "dark" : "light";
-
-    document.body.classList.toggle("dark-theme", activeTheme === "dark");
-  }
-
-  function setTheme(theme) {
-    const selectedTheme = ["light", "dark", "system"].includes(theme) ? theme : "light";
-
-    localStorage.setItem("jnjm-theme", selectedTheme);
-    applyTheme(selectedTheme);
-
-    themeButtons.forEach((button) => {
-      button.classList.toggle("is-active", button.dataset.theme === selectedTheme);
-    });
-  }
-
-  /* =====================================================
-     EVENTS
-  ===================================================== */
-
-  function pickRandomVisibleCard() {
-    const cards = [...pageRoot.querySelectorAll(".pc-card")];
-
-    if (!cards.length) return;
-
-    cards.forEach((card) => {
-      card.classList.remove("is-random-picked");
+    row.addEventListener("mousedown", event => {
+      isDown = true;
+      row.classList.add("dragging");
+      startX = event.pageX - row.offsetLeft;
+      scrollLeft = row.scrollLeft;
     });
 
-    const randomIndex = Math.floor(Math.random() * cards.length);
-    const pickedCard = cards[randomIndex];
-
-    pickedCard.classList.add("is-random-picked");
-
-    pickedCard.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-      inline: "center"
+    row.addEventListener("mouseleave", () => {
+      isDown = false;
+      row.classList.remove("dragging");
     });
 
-    window.setTimeout(() => {
-      pickedCard.classList.remove("is-random-picked");
-    }, 1800);
-  }
-
-  function navigateToPage(page) {
-    setActiveNav(page);
-    renderCurrentPage();
-  }
-
-  function setupNavigationEvents() {
-    if (photocardNavBtn) {
-      photocardNavBtn.addEventListener("click", () => {
-        navigateToPage("photocard");
-      });
-    }
-
-    if (collectionNavBtn) {
-      collectionNavBtn.addEventListener("click", () => {
-        navigateToPage("collection");
-      });
-    }
-
-    if (photocardTab) {
-      photocardTab.addEventListener("click", () => {
-        navigateToPage("photocard");
-      });
-    }
-
-    if (collectionTab) {
-      collectionTab.addEventListener("click", () => {
-        navigateToPage("collection");
-      });
-    }
-
-    if (infoTab) {
-      infoTab.addEventListener("click", openSettings);
-    }
-
-    if (surpriseFloatBtn) {
-      surpriseFloatBtn.setAttribute("aria-label", "Random pick");
-
-      surpriseFloatBtn.addEventListener("click", pickRandomVisibleCard);
-    }
-  }
-
-  function setupFilterEvents() {
-    if (searchInput) {
-      searchInput.addEventListener("input", (event) => {
-        state.search = normalizeValue(event.target.value);
-        renderCurrentPage();
-      });
-    }
-
-    [
-      [desktopMemberFilter, "member"],
-      [memberFilter, "member"],
-
-      [desktopTypeFilter, "type"],
-      [typeFilter, "type"],
-
-      [desktopEraFilter, "era"],
-      [eraFilter, "era"]
-    ].forEach(([select, key]) => {
-      if (!select) return;
-
-      select.addEventListener("change", (event) => {
-        state[key] = event.target.value;
-        renderCurrentPage();
-      });
+    row.addEventListener("mouseup", () => {
+      isDown = false;
+      row.classList.remove("dragging");
     });
 
-    [
-      resetBtn,
-      desktopResetBtn,
-      emptyResetBtn
-    ].forEach((button) => {
-      if (!button) return;
+    row.addEventListener("mousemove", event => {
+      if (!isDown) return;
 
-      button.addEventListener("click", resetFilters);
+      event.preventDefault();
+
+      const x = event.pageX - row.offsetLeft;
+      const walk = (x - startX) * 1.5;
+
+      row.scrollLeft = scrollLeft - walk;
     });
+  });
+}
 
-    if (openFiltersBtn) {
-      openFiltersBtn.addEventListener("click", openFiltersModal);
-    }
 
-    if (desktopOpenFiltersBtn) {
-      desktopOpenFiltersBtn.addEventListener("click", openFiltersModal);
-    }
+/* =====================================================
+   20. SCROLL TOP
+===================================================== */
 
-    if (filtersBackdrop) {
-      filtersBackdrop.addEventListener("click", closeFiltersModal);
-    }
+function toggleScrollTopButton() {
+  if (!scrollTopBtn) return;
 
-    if (closeFiltersBtn) {
-      closeFiltersBtn.addEventListener("click", closeFiltersModal);
-    }
-
-    if (modalApplyFiltersBtn) {
-      modalApplyFiltersBtn.addEventListener("click", () => {
-        if (modalMemberFilter) state.member = modalMemberFilter.value;
-        if (modalTypeFilter) state.type = modalTypeFilter.value;
-        if (modalEraFilter) state.era = modalEraFilter.value;
-
-        renderCurrentPage();
-        closeFiltersModal();
-      });
-    }
-
-    if (modalResetFiltersBtn) {
-      modalResetFiltersBtn.addEventListener("click", () => {
-        resetFilters();
-        closeFiltersModal();
-      });
-    }
+  if (window.scrollY > 300) {
+    scrollTopBtn.classList.add("is-visible");
+  } else {
+    scrollTopBtn.classList.remove("is-visible");
   }
+}
 
-  function setupModalEvents() {
-    if (desktopSettingsBtn) {
-      desktopSettingsBtn.addEventListener("click", openSettings);
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+/* =====================================================
+   21. THEME
+===================================================== */
+
+function setTheme(theme) {
+  localStorage.setItem("theme", theme);
+
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const shouldUseDark = theme === "dark" || (theme === "system" && prefersDark);
+
+  document.body.classList.toggle("dark-theme", shouldUseDark);
+  document.documentElement.classList.toggle("dark-theme", shouldUseDark);
+
+  themeButtons.forEach(button => {
+    button.classList.toggle("active", button.dataset.theme === theme);
+  });
+}
+
+function setupThemeControls() {
+  themeButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      setTheme(button.dataset.theme);
+    });
+  });
+
+  setTheme(localStorage.getItem("theme") || "system");
+
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+    if ((localStorage.getItem("theme") || "system") === "system") {
+      setTheme("system");
+    }
+  });
+}
+
+
+/* =====================================================
+   22. IMAGE PROTECTION
+===================================================== */
+
+function setupImageProtection() {
+  document.addEventListener("contextmenu", event => {
+    if (event.target.closest("img")) {
+      event.preventDefault();
+    }
+  });
+
+  document.addEventListener("dragstart", event => {
+    if (event.target.closest("img")) {
+      event.preventDefault();
+    }
+  });
+
+  document.addEventListener("keydown", event => {
+    const key = event.key.toLowerCase();
+
+    if (
+      (event.ctrlKey || event.metaKey) &&
+      ["s", "u", "p"].includes(key)
+    ) {
+      event.preventDefault();
+    }
+  });
+}
+
+
+/* =====================================================
+   23. EVENTS
+===================================================== */
+
+if (memberFilter) {
+  memberFilter.addEventListener("change", () => {
+    clearChipGroup(filterState.gallery.members, "#modalMemberChips");
+    applyFilters();
+  });
+}
+
+if (categoryFilter) {
+  categoryFilter.addEventListener("change", () => {
+    clearChipGroup(filterState.gallery.categories, "#modalCategoryChips");
+    applyFilters();
+  });
+}
+
+if (typeFilter) {
+  typeFilter.addEventListener("change", () => {
+    clearChipGroup(filterState.gallery.types, "#modalTypeChips");
+    applyFilters();
+  });
+}
+
+if (eraFilter) {
+  eraFilter.addEventListener("change", () => {
+    clearChipGroup(filterState.gallery.eras, "#modalEraChips");
+    applyFilters();
+  });
+}
+
+if (searchInput) {
+  searchInput.addEventListener("input", applyFilters);
+}
+
+if (emptyResetBtn) {
+  emptyResetBtn.addEventListener("click", resetFilters);
+}
+
+[
+  [shelfSearchInput, null],
+  [shelfMemberFilter, "members"],
+  [shelfCategoryFilter, "categories"],
+  [shelfTypeFilter, "types"],
+  [shelfEraFilter, "eras"]
+].forEach(([element, key]) => {
+  if (!element) return;
+
+  element.addEventListener("input", applyShelfFilters);
+
+  element.addEventListener("change", () => {
+    if (key) {
+      filterState.shelf[key].clear();
     }
 
-    if (settingsBackdrop) {
-      settingsBackdrop.addEventListener("click", closeSettings);
-    }
-
-    if (closeSettingsBtn) {
-      closeSettingsBtn.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        closeSettings();
-      });
-    }
-
-    if (filtersBackdrop) {
-      filtersBackdrop.addEventListener("click", closeFiltersModal);
-    }
-
-    if (closeFiltersBtn) {
-      closeFiltersBtn.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        closeFiltersModal();
-      });
-    }
-
-    window.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        closeSettings();
-        closeFiltersModal();
-      }
-    });
-  }
-
-  function setupThemeEvents() {
-    themeButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        setTheme(button.dataset.theme);
-      });
-    });
-  }
-
-  function setupSystemThemeListener() {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-    mediaQuery.addEventListener("change", () => {
-      const savedTheme = localStorage.getItem("jnjm-theme") || "system";
-
-      if (savedTheme === "system") {
-        applyTheme("system");
-      }
-    });
-  }
-
-  function setupSidebarEvents() {
-    if (!sidebarHandleBtn || !appShell) return;
-
-    sidebarHandleBtn.addEventListener("click", () => {
-      const isCollapsed = appShell.classList.toggle("sidebar-collapsed");
-
-      sidebarHandleBtn.setAttribute("aria-expanded", String(!isCollapsed));
-      sidebarHandleBtn.textContent = isCollapsed ? "▶" : "◀";
-    });
-  }
-
-  function setupScrollTopEvent() {
-    if (!scrollTopBtn) return;
-
-    window.addEventListener("scroll", () => {
-      scrollTopBtn.classList.toggle("show", window.scrollY > 200);
-    });
-
-    scrollTopBtn.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    });
-  }
-
-  function setupImageProtection() {
-    document.addEventListener("contextmenu", (event) => {
-      if (event.target.closest(".pc-image-wrap")) {
-        event.preventDefault();
-      }
-    });
-
-    document.addEventListener("dragstart", (event) => {
-      if (event.target.closest(".pc-image-wrap")) {
-        event.preventDefault();
-      }
-    });
-  }
-
-  /* =====================================================
-     INIT
-  ===================================================== */
-
-  function init() {
-    setupFilterOptions();
-    syncInputs();
-
-    setupNavigationEvents();
-    setupFilterEvents();
-    setupModalEvents();
-    setupThemeEvents();
-    setupSystemThemeListener();
-    setupSidebarEvents();
-    setupScrollTopEvent();
-    setupImageProtection();
-
-    const savedTheme = localStorage.getItem("jnjm-theme") || "system";
-    setTheme(savedTheme);
-
-    state.page = "photocard";
-    renderPhotocardPage();
-  }
-
-  init();
+    applyShelfFilters();
+  });
 });
+
+if (openFiltersBtn) {
+  openFiltersBtn.addEventListener("click", () => {
+    openFiltersModal("gallery");
+  });
+}
+
+if (openShelfFiltersBtn) {
+  openShelfFiltersBtn.addEventListener("click", () => {
+    openFiltersModal("shelf");
+  });
+}
+
+if (filtersBackdrop) {
+  filtersBackdrop.addEventListener("click", closeFiltersModal);
+}
+
+if (closeFiltersBtn) {
+  closeFiltersBtn.addEventListener("click", closeFiltersModal);
+}
+
+if (modalApplyFiltersBtn) {
+  modalApplyFiltersBtn.addEventListener("click", applyModalFilters);
+}
+
+if (modalResetFiltersBtn) {
+  modalResetFiltersBtn.addEventListener("click", resetModalFilters);
+}
+
+if (pcDetailBackdrop) {
+  pcDetailBackdrop.addEventListener("click", closePcDetail);
+}
+
+if (closePcDetailBtn) {
+  closePcDetailBtn.addEventListener("click", closePcDetail);
+}
+
+if (settingsBackdrop) {
+  settingsBackdrop.addEventListener("click", closeSettingsModal);
+}
+
+if (closeSettingsBtn) {
+  closeSettingsBtn.addEventListener("click", closeSettingsModal);
+}
+
+if (scrollTopBtn) {
+  scrollTopBtn.addEventListener("click", scrollToTop);
+}
+
+window.addEventListener("scroll", toggleScrollTopButton);
+
+if (homeTab) {
+  homeTab.addEventListener("click", () => {
+    switchPage("home");
+    setActiveTab(homeTab);
+    scrollToTop();
+  });
+}
+
+if (galleryTab) {
+  galleryTab.addEventListener("click", () => {
+    switchPage("gallery");
+    setActiveTab(galleryTab);
+    scrollToTop();
+  });
+}
+
+if (shelfTab) {
+  shelfTab.addEventListener("click", () => {
+    switchPage("shelf");
+    setActiveTab(shelfTab);
+    scrollToTop();
+  });
+}
+
+if (moreTab) {
+  moreTab.addEventListener("click", () => {
+    setActiveTab(moreTab);
+    openSettingsModal();
+  });
+}
+
+/* =====================================================
+   24. INIT
+===================================================== */
+
+loadSavedGallerySelectFilters();
+setupAllChipGroups();
+setupShelfStatusFilter();
+setupDragScroll();
+setupThemeControls();
+setupImageProtection();
+
+renderHomeDashboard();
+applyFilters();
+applyShelfFilters();
+
+const savedPage = window.location.hash.replace("#", "") || "home";
+
+switchPage(savedPage);
+
+setActiveTab(
+  savedPage === "gallery" ? galleryTab :
+  savedPage === "shelf" ? shelfTab :
+  homeTab
+);
+
+window.addEventListener("hashchange", () => {
+  const pageName = window.location.hash.replace("#", "") || "home";
+
+  switchPage(pageName);
+
+  setActiveTab(
+    pageName === "gallery" ? galleryTab :
+    pageName === "shelf" ? shelfTab :
+    homeTab
+  );
+});
+
+toggleScrollTopButton();

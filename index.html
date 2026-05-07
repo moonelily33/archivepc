@@ -7,248 +7,179 @@
   <title>NCT JNJM Archive</title>
 
   <link rel="stylesheet" href="style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 </head>
 
-<body>
-  <div class="app-shell">
+<body oncontextmenu="return false">
 
-    <!-- =====================================================
-         DESKTOP SIDEBAR
-    ====================================================== -->
-    <aside class="desktop-sidebar" aria-label="Desktop navigation">
-      <a class="brand brand--sidebar" href="#top" aria-label="NCT JNJM Archive home">
-        NCT JNJM <span>archive</span>
-      </a>
+  <header class="app-title-bar">
+    <h1>JENO & JAEMIN <span>archive</span></h1>
+  </header>
 
-      <div class="sidebar-divider"></div>
+  <main class="app-shell">
 
-      <nav class="sidebar-nav" aria-label="Main navigation">
-        <button class="sidebar-nav-btn is-active active" id="photocardNavBtn" type="button">
-          🎴 Photocard
-        </button>
+    <!-- ================= HOME PAGE ================= -->
+    <section class="page home-page" id="homePage">
 
-        <button class="sidebar-nav-btn" id="collectionNavBtn" type="button">
-          🗂️ Collection
-        </button>
-      </nav>
+      <section class="summary-card stamp">
+        <p class="summary-label">🗃️ Archive summary</p>
 
-      <div class="sidebar-spacer"></div>
-
-      <button class="btn btn--ghost" id="desktopSettingsBtn" type="button">
-        ⚙️ More
-      </button>
-    </aside>
-
-    <!-- DESKTOP SIDEBAR HANDLE -->
-    <button
-      class="sidebar-handle"
-      id="sidebarHandleBtn"
-      type="button"
-      aria-label="Toggle sidebar"
-      aria-expanded="true"
-    >
-      ◀
-    </button>
-
-    <!-- =====================================================
-         MAIN
-    ====================================================== -->
-    <main class="main" id="top">
-
-      <!-- =====================================================
-           HEADER / MAIN BAR
-      ====================================================== -->
-      <header class="hero">
-        <a class="brand brand--mobile" href="#top" aria-label="NCT JNJM Archive home">
-          NCT JNJM.<span>archive</span>
-        </a>
-
-        <div class="hero-actions">
-
-          <!-- DESKTOP ROW 1: SEARCH + SUMMARY -->
-          <div class="hero-row hero-row-top">
-            <label class="search-field" for="searchInput">
-              <span class="sr-only">Search archive</span>
-              <input
-                id="searchInput"
-                type="search"
-                placeholder="🔍 Search archive..."
-                autocomplete="off"
-              />
-            </label>
-
-            <div class="hero-summary" id="desktopSummary" aria-label="Desktop summary">
-              <span>Total: <strong id="desktopSumTotal">0</strong></span>
-              <span>Jeno: <strong id="desktopSumJeno">0</strong></span>
-              <span>Jaemin: <strong id="desktopSumJaemin">0</strong></span>
-              <span>Unit: <strong id="desktopSumUnit">0</strong></span>
-              <span>Other: <strong id="desktopSumOther">0</strong></span>
-            </div>
-          </div>
-
-          <!-- DESKTOP ROW 2: FILTERS + META -->
-          <div class="hero-row hero-row-bottom">
-            <div class="hero-filter-group" id="desktopFilterGroup" aria-label="Desktop filters">
-              <select id="desktopMemberFilter" aria-label="Filter by member">
-                <option value="all">All Members</option>
-                <option value="jeno">Jeno</option>
-                <option value="jaemin">Jaemin</option>
-                <option value="unit">Unit</option>
-                <option value="other">Other</option>
-              </select>
-
-              <select id="desktopTypeFilter" aria-label="Filter by type">
-                <option value="all">All Types</option>
-                <option value="album">Album</option>
-                <option value="pre-order-benefit">Pre-Order Benefit</option>
-                <option value="lucky-draw">Lucky Draw</option>
-                <option value="fan-sign">Fan Sign</option>
-                <option value="video-call-event">Video Call Event</option>
-                <option value="fan-meeting">Fan Meeting</option>
-                <option value="photocard">Photocard</option>
-                <option value="merchandise">Merchandise</option>
-                <option value="etc">Etc</option>
-              </select>
-
-              <select id="desktopEraFilter" aria-label="Filter by era">
-                <option value="all">All Eras</option>
-                <option value="the-first">The First</option>
-                <option value="we-young">We Young</option>
-                <option value="empathy">Empathy</option>
-                <option value="we-go-up">We Go Up</option>
-                <option value="we-boom">We Boom</option>
-                <option value="the-dream">The Dream</option>
-                <option value="reload">Reload</option>
-                <option value="resonance-pt-1">Resonance Pt. 1</option>
-                <option value="resonance-pt-2">Resonance Pt. 2</option>
-                <option value="hot-sauce">Hot Sauce</option>
-                <option value="hello-future">Hello Future</option>
-                <option value="universe">Universe</option>
-                <option value="smcu-express">SMCU Express</option>
-                <option value="glitch-mode">Glitch Mode</option>
-                <option value="beat-box">Beatbox</option>
-                <option value="candy">Candy</option>
-                <option value="smcu-palace">SMCU Palace</option>
-                <option value="best-friend-ever">Best Friend Ever</option>
-                <option value="istj">ISTJ</option>
-                <option value="golden-age">Golden Age</option>
-                <option value="dreamscape">Dreamscape</option>
-                <option value="moonlight">Moonlight</option>
-                <option value="the-culture-the-future">The Culture The Future</option>
-                <option value="go-back-to-the-future">Go Back To The Future</option>
-                <option value="beat-it-up">Beat It Up</option>
-                <option value="both-sides">Both Sides</option>
-                <option value="narcissism">Narcissism</option>
-              </select>
-            </div>
-
-            <div class="hero-meta-group">
-              <button class="btn btn--ghost" id="desktopOpenFiltersBtn" type="button">
-                All Filters
-              </button>
-
-              <button class="btn btn--ghost" id="desktopResetBtn" type="button">
-                Reset 🔄
-              </button>
-
-              <span class="last-update-pill">
-                Last Update: <strong id="desktopLastUpdate">26 Apr 2026</strong>
-              </span>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <!-- =====================================================
-           MOBILE / TABLET SUMMARY + FILTER SCROLL
-      ====================================================== -->
-      <section class="top-scroll" aria-label="Mobile summary and filters">
-
-        <!-- SUMMARY ROW -->
-        <div class="scroll-row" id="mobileSummary">
-          <div class="scroll-item">Total: <strong id="mobileSumTotal">0</strong></div>
-          <div class="scroll-item">Jeno: <strong id="mobileSumJeno">0</strong></div>
-          <div class="scroll-item">Jaemin: <strong id="mobileSumJaemin">0</strong></div>
-          <div class="scroll-item">Unit: <strong id="mobileSumUnit">0</strong></div>
-          <div class="scroll-item">Other: <strong id="mobileSumOther">0</strong></div>
-          <div class="scroll-item">Last Update: <strong id="mobileLastUpdate">26 Apr 2026</strong></div>
+        <div class="summary-total">
+          <strong id="totalCount">0</strong>
+          <span>Items archived</span>
         </div>
 
-        <!-- FILTER ROW -->
-        <div class="scroll-row" id="mobileFilterGroup">
-          <select class="scroll-select" id="memberFilter" aria-label="Filter by member">
-            <option value="all">All Members</option>
-            <option value="jeno">Jeno</option>
-            <option value="jaemin">Jaemin</option>
-            <option value="unit">Unit</option>
-            <option value="other">Other</option>
-          </select>
+        <p class="summary-helper-text">
+          A little overview of everything saved in your archive ✦
+        </p>
 
-          <select class="scroll-select" id="typeFilter" aria-label="Filter by type">
-            <option value="all">All Types</option>
-            <option value="album">Album</option>
-            <option value="pre-order-benefit">Pre-Order Benefit</option>
-            <option value="lucky-draw">Lucky Draw</option>
-            <option value="fan-sign">Fan Sign</option>
-            <option value="video-call-event">Video Call Event</option>
-            <option value="fan-meeting">Fan Meeting</option>
-            <option value="photocard">Photocard</option>
-            <option value="merchandise">Merchandise</option>
-            <option value="etc">Etc</option>
-          </select>
+        <div class="summary-stats">
+          <div class="summary-stat jeno">
+            <span class="summary-icon">🐶</span>
+            <strong id="jenoCount" class="jeno-count">0</strong>
+            <span>Jeno</span>
+          </div>
 
-          <select class="scroll-select" id="eraFilter" aria-label="Filter by era">
-            <option value="all">All Eras</option>
-            <option value="the-first">The First</option>
-            <option value="we-young">We Young</option>
-            <option value="empathy">Empathy</option>
-            <option value="we-go-up">We Go Up</option>
-            <option value="we-boom">We Boom</option>
-            <option value="the-dream">The Dream</option>
-            <option value="reload">Reload</option>
-            <option value="resonance-pt-1">Resonance Pt. 1</option>
-            <option value="resonance-pt-2">Resonance Pt. 2</option>
-            <option value="hot-sauce">Hot Sauce</option>
-            <option value="hello-future">Hello Future</option>
-            <option value="universe">Universe</option>
-            <option value="smcu-express">SMCU Express</option>
-            <option value="glitch-mode">Glitch Mode</option>
-            <option value="beat-box">Beatbox</option>
-            <option value="candy">Candy</option>
-            <option value="smcu-palace">SMCU Palace</option>
-            <option value="best-friend-ever">Best Friend Ever</option>
-            <option value="istj">ISTJ</option>
-            <option value="golden-age">Golden Age</option>
-            <option value="dreamscape">Dreamscape</option>
-            <option value="moonlight">Moonlight</option>
-            <option value="the-culture-the-future">The Culture The Future</option>
-            <option value="go-back-to-the-future">Go Back To The Future</option>
-            <option value="beat-it-up">Beat It Up</option>
-            <option value="both-sides">Both Sides</option>
-            <option value="narcissism">Narcissism</option>
-          </select>
+          <div class="summary-stat jaemin">
+            <span class="summary-icon">🐰</span>
+            <strong id="jaeminCount" class="jaemin-count">0</strong>
+            <span>Jaemin</span>
+          </div>
 
-          <button class="scroll-btn accent" id="resetBtn" type="button">
-            Reset 🔄
-          </button>
+          <div class="summary-stat unit">
+            <span class="summary-icon">🌸</span>
+            <strong id="unitCount" class="unit-count">0</strong>
+            <span>Unit</span>
+          </div>
 
-          <button class="scroll-btn" id="openFiltersBtn" type="button">
-            All Filters
-          </button>
+          <div class="summary-stat other">
+            <span class="summary-icon">💚</span>
+            <strong id="otherCount" class="other-count">0</strong>
+            <span>Other</span>
+          </div>
         </div>
       </section>
 
-      <!-- =====================================================
-           PAGE CONTENT
-           IMPORTANT:
-           This is page wrapper, not card grid.
-           JS creates .pc-grid inside each section.
-      ====================================================== -->
+      <section class="home-section">
+        <div class="section-head">
+          <div>
+            <h2>New in Gallery 🆕</h2>
+            <span>Random picks from the archive</span>
+          </div>
+        </div>
+        <div class="mini-grid" id="justDroppedGrid"></div>
+      </section>
+
+      <section class="home-section">
+        <div class="section-head">
+          <div>
+            <h2>Album Picks 📀</h2>
+            <span>Selected album photocards</span>
+          </div>
+        </div>
+        <div class="mini-grid" id="albumOnlyGrid"></div>
+      </section>
+
+      <section class="home-section">
+        <div class="section-head">
+          <div>
+            <h2 id="eraSpotlightTitle">Era Spotlight 💙🩷💜</h2>
+            <span id="eraSpotlightSubtitle">Random picks by era</span>
+          </div>
+        </div>
+        <div class="mini-grid" id="eraSpotlightGrid"></div>
+      </section>
+
+    </section>
+
+    <!-- ================= GALLERY PAGE ================= -->
+    <section class="page gallery-page" id="galleryPage" hidden>
+
+      <!-- Search Bar -->
+      <div class="group">
+        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+          <g>
+            <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+          </g>
+        </svg>
+        <input placeholder="Search in Gallery" type="search" class="input" id="searchInput">
+      </div>
+
+      <section class="top-scroll" aria-label="Mobile summary and filters">
+        <div class="filter-bar">
+
+          <div class="scroll-row" id="mobileFilterGroup">
+            <select class="scroll-select" id="memberFilter" aria-label="Filter by member">
+              <option value="all">Member</option>
+              <option value="jeno">Jeno</option>
+              <option value="jaemin">Jaemin</option>
+              <option value="unit">Unit</option>
+              <option value="other">Other</option>
+            </select>
+
+            <select class="scroll-select" id="categoryFilter" aria-label="Filter by category">
+              <option value="all">Category</option>
+              <option value="photocard">Photocard</option>
+              <option value="non-pc">Non Photocard</option>
+            </select>
+
+            <select class="scroll-select" id="typeFilter" aria-label="Filter by type">
+              <option value="all">Type</option>
+              <option value="album">Album</option>
+              <option value="pre-order-benefit">Pre-Order Benefit</option>
+              <option value="lucky-draw">Lucky Draw</option>
+              <option value="fan-sign">Fan Sign</option>
+              <option value="video-call-event">Video Call Event</option>
+              <option value="fan-meeting">Fan Meeting</option>
+              <option value="merchandise">Merchandise</option>
+              <option value="etc">Etc</option>
+            </select>
+
+            <select class="scroll-select" id="eraFilter" aria-label="Filter by era">
+              <option value="all">Era</option>
+              <option value="the-first">The First</option>
+              <option value="we-young">We Young</option>
+              <option value="empathy">Empathy</option>
+              <option value="we-go-up">We Go Up</option>
+              <option value="we-boom">We Boom</option>
+              <option value="the-dream">The Dream</option>
+              <option value="reload">Reload</option>
+              <option value="resonance-pt-1">Resonance Pt. 1</option>
+              <option value="resonance-pt-2">Resonance Pt. 2</option>
+              <option value="hot-sauce">Hot Sauce</option>
+              <option value="hello-future">Hello Future</option>
+              <option value="universe">Universe</option>
+              <option value="smcu-express">SMCU Express</option>
+              <option value="glitch-mode">Glitch Mode</option>
+              <option value="beat-box">Beatbox</option>
+              <option value="candy">Candy</option>
+              <option value="smcu-palace">SMCU Palace</option>
+              <option value="best-friend-ever">Best Friend Ever</option>
+              <option value="istj">ISTJ</option>
+              <option value="golden-age">Golden Age</option>
+              <option value="dreamscape">Dreamscape</option>
+              <option value="moonlight">Moonlight</option>
+              <option value="the-culture-the-future">The Culture, The Future</option>
+              <option value="go-back-to-the-future">Go Back To The Future</option>
+              <option value="beat-it-up">Beat It Up</option>
+              <option value="both-sides">Both Sides</option>
+              <option value="narcissism">Narcissism</option>
+            </select>
+          </div>
+
+          <button class="filter-toggle" id="openFiltersBtn" type="button" aria-label="Open filters">
+            ☰
+          </button>
+
+        </div>
+      </section>
+
       <section class="pc-page" id="pcGrid" aria-live="polite"></section>
 
-      <!-- =====================================================
-           EMPTY STATE
-      ====================================================== -->
       <section class="empty-state" id="emptyState" hidden>
         <div class="empty-icon" aria-hidden="true">🐶 🐰</div>
         <h2>No items found</h2>
@@ -257,12 +188,149 @@
           Reset Filters 🔄
         </button>
       </section>
-    </main>
-  </div>
 
-  <!-- =====================================================
-       FILTER MODAL
-  ====================================================== -->
+    </section>
+
+    <!-- ================= MY SHELF PAGE ================= -->
+    <section class="page shelf-page" id="shelfPage" hidden>
+
+      <section class="summary-card stamp shelf-summary-card">
+        <p class="summary-label">🗄️ My Shelf summary</p>
+
+        <div class="summary-total shelf-total">
+          <strong id="shelfCount">0 / 0</strong>
+          <span>Items collected</span>
+        </div>
+
+        <p class="summary-helper-text">
+          Your personal shelf for everything you’ve collected ✦
+        </p>
+
+        <div class="summary-stats shelf-stats">
+
+          <div class="summary-stat shelf-wide jeno">
+            <span class="summary-icon">🐶</span>
+
+            <div class="shelf-ratio">
+              <strong id="shelfJenoOwned">0</strong>
+              <div class="shelf-divider"></div>
+              <strong id="shelfJenoTotal">0</strong>
+              <span>Jeno</span>
+            </div>
+          </div>
+
+          <div class="summary-stat shelf-wide jaemin">
+            <span class="summary-icon">🐰</span>
+
+            <div class="shelf-ratio">
+              <strong id="shelfJaeminOwned">0</strong>
+              <div class="shelf-divider"></div>
+              <strong id="shelfJaeminTotal">0</strong>
+              <span>Jaemin</span>
+            </div>
+          </div>
+
+          <div class="summary-stat shelf-wide unit">
+            <span class="summary-icon">🌸</span>
+
+            <div class="shelf-ratio">
+              <strong id="shelfUnitOwned">0</strong>
+              <div class="shelf-divider"></div>
+              <strong id="shelfUnitTotal">0</strong>
+              <span>Unit</span>
+            </div>
+          </div>
+
+          <div class="summary-stat shelf-wide other">
+            <span class="summary-icon">💚</span>
+
+            <div class="shelf-ratio">
+              <strong id="shelfOtherOwned">0</strong>
+              <div class="shelf-divider"></div>
+              <strong id="shelfOtherTotal">0</strong>
+              <span>Other</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    <div class="storage-notice">
+      🗄️ Tiny reminder for collectors: My Shelf is currently stored only in your browser’s local storage. No login, cloud sync, or backup system yet. So please make sure you’re using the same browser/device, and avoid private/incognito mode if you want to keep your collection saved.
+    </div>
+
+      <div class="group">
+        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+          <g>
+            <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+          </g>
+        </svg>
+
+        <input placeholder="Search in My Shelf" type="search" class="input" id="shelfSearchInput">
+      </div>
+
+      <section class="top-scroll" aria-label="My Shelf filters">
+        <div class="filter-bar shelf-filter-bar">
+
+          <div class="shelf-filter-content">
+
+            <div class="scroll-row shelf-main-filters">
+              <select class="scroll-select" id="shelfMemberFilter" aria-label="Filter shelf by member">
+                <option value="all">Member</option>
+                <option value="jeno">Jeno</option>
+                <option value="jaemin">Jaemin</option>
+                <option value="unit">Unit</option>
+                <option value="other">Other</option>
+              </select>
+
+              <select class="scroll-select" id="shelfCategoryFilter" aria-label="Filter shelf by category">
+                <option value="all">Category</option>
+                <option value="photocard">Photocard</option>
+                <option value="non-pc">Non Photocard</option>
+              </select>
+
+              <select class="scroll-select" id="shelfTypeFilter" aria-label="Filter shelf by type">
+                <option value="all">Type</option>
+                <option value="album">Album</option>
+                <option value="pre-order-benefit">Pre-Order Benefit</option>
+                <option value="lucky-draw">Lucky Draw</option>
+                <option value="fan-sign">Fan Sign</option>
+                <option value="video-call-event">Video Call Event</option>
+                <option value="fan-meeting">Fan Meeting</option>
+                <option value="merchandise">Merchandise</option>
+                <option value="etc">Etc</option>
+              </select>
+
+              <select class="scroll-select" id="shelfEraFilter" aria-label="Filter shelf by era">
+                <option value="all">Era</option>
+                <option value="istj">ISTJ</option>
+                <option value="moonlight">Moonlight</option>
+                <option value="narcissism">Narcissism</option>
+              </select>
+            </div>
+
+            <div class="shelf-status-filters" id="shelfStatusFilters" aria-label="Filter shelf by status">
+              <button class="shelf-status-chip active" type="button" data-status="all">All Status 📂</button>
+              <button class="shelf-status-chip" type="button" data-status="dont-collect">Don’t collect ❌</button>
+              <button class="shelf-status-chip" type="button" data-status="wishlist">Wishlist 🛒</button>
+              <button class="shelf-status-chip" type="button" data-status="on-the-way">On the way 🚚</button>
+              <button class="shelf-status-chip" type="button" data-status="collected">Collected ✔️</button>
+            </div>
+
+          </div>
+
+          <button class="filter-toggle" id="openShelfFiltersBtn" type="button" aria-label="Open shelf filters">
+            ☰
+          </button>
+
+        </div>
+      </section>
+
+      <section class="pc-page" id="shelfGrid" aria-live="polite"></section>
+
+    </section>
+
+  <!-- ================= FILTER MODAL ================= -->
   <div class="modal" id="filtersModal" hidden>
     <button
       class="modal-backdrop"
@@ -286,65 +354,70 @@
       </div>
 
       <div class="filter-modal-body">
+
         <div class="field-group">
-          <label for="modalMemberFilter">Member</label>
-          <select id="modalMemberFilter">
-            <option value="all">All Members</option>
-            <option value="jeno">Jeno</option>
-            <option value="jaemin">Jaemin</option>
-            <option value="unit">Unit</option>
-            <option value="cihuy">-</option>
-          </select>
+          <label>Member</label>
+          <div class="chip-group" id="modalMemberChips">
+            <button type="button" class="filter-chip" data-value="jeno">Jeno</button>
+            <button type="button" class="filter-chip" data-value="jaemin">Jaemin</button>
+            <button type="button" class="filter-chip" data-value="unit">Unit</button>
+            <button type="button" class="filter-chip" data-value="other">Other</button>
+          </div>
         </div>
 
         <div class="field-group">
-          <label for="modalTypeFilter">Type</label>
-          <select id="modalTypeFilter">
-            <option value="all">All Types</option>
-            <option value="album">Album</option>
-            <option value="pre-order-benefit">Pre-Order Benefit</option>
-            <option value="lucky-draw">Lucky Draw</option>
-            <option value="fan-sign">Fan Sign</option>
-            <option value="video-call-event">Video Call Event</option>
-            <option value="fan-meeting">Fan Meeting</option>
-            <option value="photocard">Photocard</option>
-            <option value="merchandise">Merchandise</option>
-            <option value="etc">Etc</option>
-          </select>
+          <label>Category</label>
+          <div class="chip-group" id="modalCategoryChips">
+            <button type="button" class="filter-chip" data-value="photocard">Photocard</button>
+            <button type="button" class="filter-chip" data-value="non-pc">Non Photocard</button>
+          </div>
         </div>
 
         <div class="field-group">
-          <label for="modalEraFilter">Era</label>
-          <select id="modalEraFilter">
-            <option value="all">All Eras</option>
-            <option value="the-first">The First</option>
-            <option value="we-young">We Young</option>
-            <option value="empathy">Empathy</option>
-            <option value="we-go-up">We Go Up</option>
-            <option value="we-boom">We Boom</option>
-            <option value="the-dream">The Dream</option>
-            <option value="reload">Reload</option>
-            <option value="resonance-pt-1">Resonance Pt. 1</option>
-            <option value="resonance-pt-2">Resonance Pt. 2</option>
-            <option value="hot-sauce">Hot Sauce</option>
-            <option value="hello-future">Hello Future</option>
-            <option value="universe">Universe</option>
-            <option value="smcu-express">SMCU Express</option>
-            <option value="glitch-mode">Glitch Mode</option>
-            <option value="beat-box">Beatbox</option>
-            <option value="candy">Candy</option>
-            <option value="smcu-palace">SMCU Palace</option>
-            <option value="best-friend-ever">Best Friend Ever</option>
-            <option value="istj">ISTJ</option>
-            <option value="golden-age">Golden Age</option>
-            <option value="dreamscape">Dreamscape</option>
-            <option value="moonlight">Moonlight</option>
-            <option value="the-culture-the-future">The Culture The Future</option>
-            <option value="go-back-to-the-future">Go Back To The Future</option>
-            <option value="beat-it-up">Beat It Up</option>
-            <option value="both-sides">Both Sides</option>
-            <option value="narcissism">Narcissism</option>
-          </select>
+          <label>Type</label>
+          <div class="chip-group" id="modalTypeChips">
+            <button type="button" class="filter-chip" data-value="album">Album</button>
+            <button type="button" class="filter-chip" data-value="pre-order-benefit">Pre-Order Benefit</button>
+            <button type="button" class="filter-chip" data-value="lucky-draw">Lucky Draw</button>
+            <button type="button" class="filter-chip" data-value="fan-sign">Fan Sign</button>
+            <button type="button" class="filter-chip" data-value="video-call-event">Video Call</button>
+            <button type="button" class="filter-chip" data-value="fan-meeting">Fan Meeting</button>
+            <button type="button" class="filter-chip" data-value="merchandise">Merchandise</button>
+            <button type="button" class="filter-chip" data-value="etc">Etc</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Era</label>
+          <div class="chip-group" id="modalEraChips">
+            <button type="button" class="filter-chip" data-value="the-first">The First</button>
+            <button type="button" class="filter-chip" data-value="we-young">We Young</button>
+            <button type="button" class="filter-chip" data-value="empathy">Empathy</button>
+            <button type="button" class="filter-chip" data-value="we-go-up">We Go Up</button>
+            <button type="button" class="filter-chip" data-value="we-boom">We Boom</button>
+            <button type="button" class="filter-chip" data-value="the-dream">The Dream</button>
+            <button type="button" class="filter-chip" data-value="reload">Reload</button>
+            <button type="button" class="filter-chip" data-value="resonance-pt-1">Resonance Pt. 1</button>
+            <button type="button" class="filter-chip" data-value="resonance-pt-2">Resonance Pt. 2</button>
+            <button type="button" class="filter-chip" data-value="hot-sauce">Hot Sauce</button>
+            <button type="button" class="filter-chip" data-value="hello-future">Hello Future</button>
+            <button type="button" class="filter-chip" data-value="universe">Universe</button>
+            <button type="button" class="filter-chip" data-value="smcu-express">SMCU Express</button>
+            <button type="button" class="filter-chip" data-value="glitch-mode">Glitch Mode</button>
+            <button type="button" class="filter-chip" data-value="beat-box">Beatbox</button>
+            <button type="button" class="filter-chip" data-value="candy">Candy</button>
+            <button type="button" class="filter-chip" data-value="smcu-palace">SMCU Palace</button>
+            <button type="button" class="filter-chip" data-value="best-friend-ever">Best Friend Ever</button>
+            <button type="button" class="filter-chip" data-value="istj">ISTJ</button>
+            <button type="button" class="filter-chip" data-value="golden-age">Golden Age</button>
+            <button type="button" class="filter-chip" data-value="dreamscape">Dreamscape</button>
+            <button type="button" class="filter-chip" data-value="moonlight">Moonlight</button>
+            <button type="button" class="filter-chip" data-value="the-culture-the-future">The Culture The Future</button>
+            <button type="button" class="filter-chip" data-value="go-back-to-the-future">Go Back To The Future</button>
+            <button type="button" class="filter-chip" data-value="beat-it-up">Beat It Up</button>
+            <button type="button" class="filter-chip" data-value="both-sides">Both Sides</button>
+            <button type="button" class="filter-chip" data-value="narcissism">Narcissism</button>
+          </div>
         </div>
 
         <div class="filter-modal-actions">
@@ -356,13 +429,12 @@
             Apply 🖼️
           </button>
         </div>
+
       </div>
     </section>
   </div>
 
-  <!-- =====================================================
-       SETTINGS / MORE MODAL
-  ====================================================== -->
+  <!-- ================= SETTINGS MODAL ================= -->
   <div class="modal" id="settingsModal" hidden>
     <button
       class="modal-backdrop"
@@ -444,19 +516,22 @@
 
         <section class="settings-section">
           <h3>Theme</h3>
-          <p>Choose the vibe of your little space — System follows your device, Light mode feels soft and bright, while Dark mode feels calm and cozy 💻🌞⭐</p>
+          <p>
+            Choose the vibe of your little space — System follows your device,
+            Light mode feels soft and bright, while Dark mode feels calm and cozy 💻🌞⭐
+          </p>
 
           <div class="theme-options" id="themeOptions">
-
             <button class="theme-option" data-theme="system" type="button">
-              System 💻✨
+              System 💻
             </button>
+
             <button class="theme-option" data-theme="light" type="button">
-              Light 🌸🌞
+              Light 🌞
             </button>
 
             <button class="theme-option" data-theme="dark" type="button">
-              Dark 🌙✨
+              Dark 🌙
             </button>
           </div>
         </section>
@@ -475,48 +550,72 @@
             </a>
           </p>
         </section>
+
       </div>
     </section>
   </div>
 
-  <!-- =====================================================
-       MOBILE / TABLET BOTTOM NAV
-       Random pick sengaja tidak masuk bottom bar.
-       Diganti floating button.
-  ====================================================== -->
 
-<nav class="bottom-nav" aria-label="Bottom navigation">
+  <!-- ================= PC DETAIL MODAL ================= -->
+  <div class="modal" id="pcDetailModal" hidden>
+    <button
+      class="modal-backdrop"
+      id="pcDetailBackdrop"
+      type="button"
+      aria-label="Close PC details"
+    ></button>
 
-  <button class="bottom-nav-item is-active" id="photocardTab" type="button">
-    <svg viewBox="0 0 24 24" class="bottom-nav-icon" aria-hidden="true">
-      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v13A2.5 2.5 0 0 1 17.5 21h-11A2.5 2.5 0 0 1 4 18.5v-13Z"/>
-      <path d="M8 8h8M8 12h8M8 16h5"/>
-    </svg>
-    <span>Photocard</span>
-  </button>
+    <section
+      class="modal-panel pc-detail-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="pcDetailTitle"
+    >
+      <div class="modal-head">
+        <h2 id="pcDetailTitle">Item Details</h2>
 
-  <button class="bottom-nav-item" id="collectionTab" type="button">
-    <svg viewBox="0 0 24 24" class="bottom-nav-icon" aria-hidden="true">
-      <path d="M4 5h16v14H4z"/>
-      <path d="M8 9h8M8 13h8M8 17h5"/>
-    </svg>
-    <span>Collection</span>
-  </button>
+        <button class="close-btn" id="closePcDetailBtn" type="button" aria-label="Close PC details">
+          ×
+        </button>
+      </div>
 
-  <button class="bottom-nav-item" id="infoTab" type="button">
-    <svg viewBox="0 0 24 24" class="bottom-nav-icon" aria-hidden="true">
-      <circle cx="4" cy="12" r="1.8" fill="currentColor"/>
-      <circle cx="12" cy="12" r="1.8" fill="currentColor"/>
-      <circle cx="20" cy="12" r="1.8" fill="currentColor"/>
-    </svg>
-    <span>More</span>
-  </button>
-</nav>
+      <div class="pc-detail-body">
+        <div class="pc-detail-image-wrap">
+          <img
+            id="pcDetailImage"
+            class="pc-detail-image protected-image"
+            src=""
+            alt=""
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+            oncontextmenu="return false"
+          >
+        </div>
 
-  <!-- =====================================================
-       FLOATING SURPRISE BUTTON
-       Quick action for desktop, tablet, and mobile.
-  ====================================================== -->
+        <div class="pc-detail-info">
+          <p id="pcDetailMember" class="pc-detail-member"></p>
+          <h3 id="pcDetailName"></h3>
+
+          <div class="pc-detail-meta">
+            <span id="pcDetailEra"></span>
+            <span id="pcDetailType"></span>
+            <span id="pcDetailCategory"></span>
+          </div>
+
+          <div class="pc-status-actions" aria-label="Collection status">
+            <button class="pc-status-btn" type="button" data-status="unmarked">Unmarked 🕹️</button>
+            <button class="pc-status-btn" type="button" data-status="dont-collect">Don’t collect ❌</button>
+            <button class="pc-status-btn" type="button" data-status="wishlist">Wishlist 🛒</button>
+            <button class="pc-status-btn" type="button" data-status="on-the-way">On the way 🚚</button>
+            <button class="pc-status-btn" type="button" data-status="collected">Collected ✔️</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= FLOATING BUTTONS ================= -->
   <button
     class="surprise-float"
     id="surpriseFloatBtn"
@@ -527,18 +626,36 @@
     ⭐
   </button>
 
-  <!-- =====================================================
-       SCROLL TOP
-  ====================================================== -->
   <button class="scroll-top" id="scrollTopBtn" type="button" aria-label="Back to top">
     ⬆️
   </button>
 
-  <!-- =====================================================
-       DATA FILES PER ERA / CATEGORY
-  ====================================================== -->
+  <!-- ================= BOTTOM NAV ================= -->
+  <nav class="bottom-nav" aria-label="Bottom navigation">
 
-  <!-- PHOTOCARD DATA FILES -->
+    <button class="bottom-nav-item is-active" id="homeTab" type="button">
+      <span class="bottom-nav-icon">🏠</span>
+      <span class="bottom-nav-label">Home</span>
+    </button>
+
+    <button class="bottom-nav-item" id="galleryTab" type="button">
+      <span class="bottom-nav-icon">🖼️</span>
+      <span class="bottom-nav-label">Gallery</span>
+    </button>
+
+    <button class="bottom-nav-item" id="shelfTab" type="button">
+      <span class="bottom-nav-icon">🗄️</span>
+      <span class="bottom-nav-label">My Shelf</span>
+    </button>
+
+    <button class="bottom-nav-item" id="moreTab" type="button">
+      <span class="bottom-nav-icon">⋯</span>
+      <span class="bottom-nav-label">More</span>
+    </button>
+
+  </nav>
+
+  <!-- ================= DATA FILES ================= -->
   <script src="data/the-first.js"></script>
   <script src="data/we-young.js"></script>
   <script src="data/empathy.js"></script>
@@ -567,7 +684,7 @@
   <script src="data/both-sides.js"></script>
   <script src="data/narcissism.js"></script>
 
-  <!-- MAIN LOGIC -->
   <script src="script.js"></script>
+
 </body>
 </html>

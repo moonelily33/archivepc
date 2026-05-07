@@ -622,10 +622,20 @@ body {
 }
 
 .modal-head {
+  position: sticky;
+  top: -18px;
+  z-index: 10;
+
   display: grid;
   grid-template-columns: 1fr 32px;
   align-items: center;
   gap: 12px;
+
+  margin: -18px -18px 14px;
+  padding: 18px;
+
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
 }
 
 .modal-head h2 {

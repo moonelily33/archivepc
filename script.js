@@ -203,6 +203,9 @@ function getItemId(item) {
   return item.id || `${item.member}-${item.era}-${item.name}`;
 }
 
+formatLabel(item.type)
+formatLabel(item.category)
+formatLabel(item.era)
 
 /* =====================================================
    5. PC STATUS STORAGE
@@ -1290,6 +1293,12 @@ if (moreTab) {
     setActiveTab(moreTab);
     openSettingsModal();
   });
+}
+
+function formatLabel(text) {
+  return String(text || "")
+    .replaceAll("-", " ")
+    .replace(/\b\w/g, c => c.toUpperCase());
 }
 
 /* =====================================================

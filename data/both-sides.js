@@ -1,339 +1,101 @@
-globalThis.bothSidesData = [
-
-   /* ALBUM */ 
+window.bothSides = [
     {
-        image: "img/jeno1.jpg",
+        image: "https://...",
+        id: "bothsides-md-jeno-001",
+        name: "BOTH SIDES RANDOM TRADING CARD JENO Ver.",
         member: "jeno",
-        title: "BOTH SIDES SIDE A Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
+        era: "both sides",
+        category: "photocard",
+        type: "merchandise",
     },
     {
-        image: "img/jeno1.jpg",
+        image: "https://res.cloudinary.com/dux1jsfdq/image/upload/v1778218945/both_sides_md_tc_jaemin_3_egjzte.webp",
+        id: "bothsides-md-jaemin-001",
+        name: "BOTH SIDES RANDOM TRADING CARD JAEMIN Ver.",
+        member: "jaemin",
+        era: "both sides",
+        category: "photocard",
+        type: "merchandise",
+    },
+    {
+        image: "https://...",
+        id: "bothsides-md-unit-001",
+        name: "BOTH SIDES RANDOM TRADING CARD Unit Ver.",
+        member: "unit",
+        era: "both sides",
+        category: "photocard",
+        type: "merchandise",
+    },
+    {
+        image: "https://...",
+        id: "bothsides-md-jeno-002",
+        name: "BOTH SIDES RANDOM TRADING CARD SEPCIAL JENO Ver.",
         member: "jeno",
-        title: "BOTH SIDES SIDE A Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
+        era: "both sides",
+        category: "photocard",
+        type: "merchandise",
     },
     {
-        image: "img/jeno1.jpg",
+        image: "https://...",
+        id: "bothsides-md-jaemin-002",
+        name: "BOTH SIDES RANDOM TRADING CARD SPECIAL JAEMIN Ver.",
+        member: "jaemin",
+        era: "both sides",
+        category: "photocard",
+        type: "merchandise",
+    },
+    {
+        image: "https://res.cloudinary.com/dux1jsfdq/image/upload/v1778218945/both_sides_md_tc_jeno_2_qmhg9d.webp",
+        id: "bothsides-md-jeno-003",
+        name: "BOTH SIDES RANDOM TRADING CARD SELFIE JENO Ver.",
         member: "jeno",
-        title: "BOTH SIDES SIDE A Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
+        era: "both sides",
+        category: "photocard",
+        type: "merchandise",
     },
     {
-        image: "img/jeno1.jpg",
+        image: "https://res.cloudinary.com/dux1jsfdq/image/upload/v1778218946/both_sides_md_tc_jaemin_2_tig4mg.webp",
+        id: "bothsides-md-jaemin-003",
+        name: "BOTH SIDES RANDOM TRADING CARD SELFIE JAEMIN Ver.",
         member: "jaemin",
-        title: "BOTH SIDES SIDE A Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
+        era: "both sides",
+        category: "photocard",
+        type: "merchandise",
     },
     {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES SIDE A Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES SIDE A Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
+        image: "https://res.cloudinary.com/dux1jsfdq/image/upload/v1778218945/both_sides_md_tc_jeno_1_pchch6.webp",
+        id: "bothsides-md-jeno-004",
+        name: "BOTH SIDES RANDOM TRADING CARD SELFIE JENO Ver.",
         member: "jeno",
-        title: "BOTH SIDES SIDE B Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
+        era: "both sides",
+        category: "photocard",
+        type: "merchandise",
     },
     {
-        image: "img/jeno1.jpg",
+        image: "https://res.cloudinary.com/dux1jsfdq/image/upload/v1778218946/both_sides_md_tc_jaemin_1_w2mcrg.webp",
+        id: "bothsides-md-jaemin-004",
+        name: "BOTH SIDES RANDOM TRADING CARD SELFIE JAEMIN Ver.",
+        member: "jaemin",
+        era: "both sides",
+        category: "photocard",
+        type: "merchandise",
+    },
+    {
+        image: "https://...",
+        id: "bothsides-md-unit-003",
+        name: "BOTH SIDES RANDOM TRADING CARD SELFIE UNIT Ver.",
         member: "jeno",
-        title: "BOTH SIDES SIDE B Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
+        era: "both sides",
+        category: "photocard",
+        type: "merchandise",
     },
     {
-        image: "img/jeno1.jpg",
+        image: "https://...",
+        id: "bothsides-md-jeno-004",
+        name: "BOTH SIDES RANDOM TRADING CARD SELFIE UNIT Ver.",
         member: "jeno",
-        title: "BOTH SIDES SIDE B Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
+        era: "both sides",
+        category: "photocard",
+        type: "merchandise",
     },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES SIDE B Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES SIDE B Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES SIDE B Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jeno",
-        title: "BOTH SIDES POSTER Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jeno",
-        title: "BOTH SIDES POSTER Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jeno",
-        title: "BOTH SIDES POSTER Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES POSTER Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES POSTER Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES POSTER Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES POSTER Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jeno",
-        title: "BOTH SIDES EVIDENCE WHITE Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jeno",
-        title: "BOTH SIDES EVIDENCE WHITE Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jeno",
-        title: "BOTH SIDES EVIDENCE WHITE Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jeno",
-        title: "BOTH SIDES EVIDENCE WHITE Ver.",
-        type: "album",
-        era: "both-sides",
-        info: "ID CARD"
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES EVIDENCE WHITE Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES EVIDENCE WHITE Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES EVIDENCE WHITE Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES EVIDENCE WHITE Ver.",
-        type: "album",
-        era: "both-sides",
-        info: "ID CARD"
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jeno",
-        title: "BOTH SIDES EVIDENCE BLACK Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jeno",
-        title: "BOTH SIDES EVIDENCE BLACK Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jeno",
-        title: "BOTH SIDES EVIDENCE BLACK Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jeno",
-        title: "BOTH SIDES EVIDENCE BLACK Ver.",
-        type: "album",
-        era: "both-sides",
-        info: "ID CARD"
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES EVIDENCE BLACK Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES EVIDENCE BLACK Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES EVIDENCE BLACK Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES EVIDENCE BLACK Ver.",
-        type: "album",
-        era: "both-sides",
-        info: "ID CARD"
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jeno",
-        title: "BOTH SIDES BEST SIDE Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jeno",
-        title: "BOTH SIDES BEST SIDE Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jeno",
-        title: "BOTH SIDES BEST SIDE Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES BEST SIDE Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES BEST SIDE Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-    {
-        image: "img/jeno1.jpg",
-        member: "jaemin",
-        title: "BOTH SIDES BEST SIDE Ver.",
-        type: "album",
-        era: "both-sides",
-        info: ""
-    },
-
-    /** POB */
-    /** LD */
-    /** FS */
-    /** VCE */
-    /** EVENT */
-
-]
+];

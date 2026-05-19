@@ -79,7 +79,6 @@ const shelfEraFilter = document.getElementById("shelfEraFilter");
 const shelfStatusFilters = document.getElementById("shelfStatusFilters");
 
 const scrollTopBtn = document.getElementById("scrollTopBtn");
-const surpriseFloatBtn = document.getElementById("surpriseFloatBtn");
 const scrollRows = document.querySelectorAll(".scroll-row");
 
 const filtersModal = document.getElementById("filtersModal");
@@ -1258,17 +1257,6 @@ if (closeSettingsBtn) {
 
 if (scrollTopBtn) {
   scrollTopBtn.addEventListener("click", scrollToTop);
-}
-
-if (surpriseFloatBtn) {
-  surpriseFloatBtn.addEventListener("click", () => {
-    const sourceItems = getFilteredItems().length ? getFilteredItems() : allItems;
-    const randomItem = getRandomItems(sourceItems, 1)[0];
-
-    if (randomItem) {
-      openPcDetail(randomItem);
-    }
-  });
 }
 
 window.addEventListener("scroll", toggleScrollTopButton);

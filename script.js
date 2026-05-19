@@ -79,6 +79,7 @@ const shelfEraFilter = document.getElementById("shelfEraFilter");
 const shelfStatusFilters = document.getElementById("shelfStatusFilters");
 
 const scrollTopBtn = document.getElementById("scrollTopBtn");
+const surpriseFloatBtn = document.getElementById("surpriseFloatBtn");
 const scrollRows = document.querySelectorAll(".scroll-row");
 
 const filtersModal = document.getElementById("filtersModal");
@@ -203,9 +204,6 @@ function getItemId(item) {
   return item.id || `${item.member}-${item.era}-${item.name}`;
 }
 
-formatLabel(item.type)
-formatLabel(item.category)
-formatLabel(item.era)
 
 /* =====================================================
    5. PC STATUS STORAGE
@@ -1262,6 +1260,17 @@ if (scrollTopBtn) {
   scrollTopBtn.addEventListener("click", scrollToTop);
 }
 
+if (surpriseFloatBtn) {
+  surpriseFloatBtn.addEventListener("click", () => {
+    const sourceItems = getFilteredItems().length ? getFilteredItems() : allItems;
+    const randomItem = getRandomItems(sourceItems, 1)[0];
+
+    if (randomItem) {
+      openPcDetail(randomItem);
+    }
+  });
+}
+
 window.addEventListener("scroll", toggleScrollTopButton);
 
 if (homeTab) {
@@ -1293,12 +1302,6 @@ if (moreTab) {
     setActiveTab(moreTab);
     openSettingsModal();
   });
-}
-
-function formatLabel(text) {
-  return String(text || "")
-    .replaceAll("-", " ")
-    .replace(/\b\w/g, c => c.toUpperCase());
 }
 
 /* =====================================================

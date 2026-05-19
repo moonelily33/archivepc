@@ -1,6 +1,6 @@
 window.BOTH_SIDES = [
     {
-        image: "https://...",
+        image: "",
         id: "bothsides-md-jeno-001",
         name: "BOTH SIDES RANDOM TRADING CARD JENO Ver.",
         member: "jeno",
@@ -18,7 +18,7 @@ window.BOTH_SIDES = [
         type: "merchandise",
     },
     {
-        image: "https://...",
+        image: "",
         id: "bothsides-md-unit-001",
         name: "BOTH SIDES RANDOM TRADING CARD Unit Ver.",
         member: "unit",
@@ -27,16 +27,16 @@ window.BOTH_SIDES = [
         type: "merchandise",
     },
     {
-        image: "https://...",
+        image: "",
         id: "bothsides-md-jeno-002",
-        name: "BOTH SIDES RANDOM TRADING CARD SEPCIAL JENO Ver.",
+        name: "BOTH SIDES RANDOM TRADING CARD SPECIAL JENO Ver.",
         member: "jeno",
         era: "both-sides",
         category: "photocard",
         type: "merchandise",
     },
     {
-        image: "https://...",
+        image: "",
         id: "bothsides-md-jaemin-002",
         name: "BOTH SIDES RANDOM TRADING CARD SPECIAL JAEMIN Ver.",
         member: "jaemin",
@@ -81,7 +81,7 @@ window.BOTH_SIDES = [
         type: "merchandise",
     },
     {
-        image: "https://...",
+        image: "",
         id: "bothsides-md-unit-003",
         name: "BOTH SIDES RANDOM TRADING CARD SELFIE UNIT Ver.",
         member: "unit",
@@ -90,10 +90,10 @@ window.BOTH_SIDES = [
         type: "merchandise",
     },
     {
-        image: "https://...",
+        image: "",
         id: "bothsides-md-unit-004",
         name: "BOTH SIDES RANDOM TRADING CARD SELFIE UNIT Ver.",
-        member: "jeno",
+        member: "unit",
         era: "both-sides",
         category: "photocard",
         type: "merchandise",
